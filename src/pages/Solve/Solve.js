@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +27,7 @@ const Instruction = styled.div`
 
 const BoxHead = styled.div`
   width: 100%;
-  height: 3rem;
+  height: 5%;
   background: #16181a;
   display: flex;
   justify-content: center;
@@ -39,7 +41,6 @@ const Editor = styled.div`
 `;
 
 const Solution = styled.div`
-  //margin: 0 5%;
   width: 100%;
   height: 80%;
 `;
@@ -69,18 +70,37 @@ const SubmitBtn = styled.div`
   align-items: center;
 `;
 
+const MarkDown = styled(ReactMarkdown)`
+  width: 90%;
+  height: 95%;
+  padding: 1rem;
+`;
+
 const Solve = () => {
   const [code, setCode] = useState(
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
-  useEffect(() => {
-    console.log(code);
-  }, [code]);
+
+  const markdown = `A paragraph with *emphasis* and **strong importance**.
+
+> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |
+`;
+
   return (
     <Container>
       <CodeContainer>
         <Instruction>
           <BoxHead>Instructions</BoxHead>
+          <MarkDown children={markdown} remarkPlugins={[remarkGfm]} />
         </Instruction>
         <Editor>
           <Solution>

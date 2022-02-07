@@ -20,16 +20,25 @@ const Container = styled.div`
   }
 `;
 
+const Last = styled.p`
+  margin-top: 3rem;
+`;
+
 const Home = () => {
   return (
     <Container>
       <div>
         <img src={logo} alt="" />
         <p>
-          안녕하세요 멋쟁이사자처럼 at 국민대학교에 지원해주셔서 감사합니다!
+          &lt;p&gt; 안녕하세요 멋쟁이사자처럼 at 국민대학교에 지원해주셔서
+          감사합니다!
           <br /> 로그인 후 문제 섹션에 가셔서 기제된 문제들을 푸시면 되겠습니다.
-          🙇‍♂️
+          🙇‍♂️ &lt;/p&gt;
+          <br />
         </p>
+        <Last>
+          문의: 010-9302-1013 이승환 (전화 혹은 카톡으로 문의해주세요!)
+        </Last>
       </div>
     </Container>
   );
