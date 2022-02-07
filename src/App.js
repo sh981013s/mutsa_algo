@@ -1,5 +1,5 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Home, Solve } from './pages/index';
+import { Home, Solve, Result } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 
 function App() {
@@ -12,6 +12,9 @@ function App() {
         </Route>
         <Route exact path="/solve">
           <Solve />
+        </Route>
+        <Route exact path="/result">
+          <Result />
         </Route>
       </BrowserRouter>
     </>

@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 
 const Solve = () => {
   const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`);
+  useEffect(() => {
+    console.log(code);
+  }, [code]);
   return (
     <CodeEditor
       value={code}
