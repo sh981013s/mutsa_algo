@@ -1,5 +1,5 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Home, Solve, Result, Problems } from './pages/index';
+import { Home, Solve, Result, Problems, NewQuestion } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
 import 'responsive-navbar-react/dist/index.css';
@@ -61,6 +61,9 @@ function App() {
           </Route>
           <Route exact path="/result">
             <Result />
+          </Route>
+          <Route exact path="/newQuestion">
+            <NewQuestion />
           </Route>
         </BrowserRouter>
       </Container>
