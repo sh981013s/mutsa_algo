@@ -1,11 +1,39 @@
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Home, Solve, Result } from './pages/index';
 import GlobalStyle from './GlobalStyle';
+import { Navbar } from 'responsive-navbar-react';
+import 'responsive-navbar-react/dist/index.css';
 
 function App() {
+  const props = {
+    items: [
+      {
+        text: 'Home',
+        link: '/',
+      },
+      {
+        text: '문제',
+        link: '#docs',
+      },
+    ],
+    logo: {
+      text: '멋쟁이 사자처럼 at 국민대 사전과제',
+    },
+    style: {
+      barStyles: {
+        background: '#444',
+      },
+      sidebarStyles: {
+        background: '#222',
+        buttonColor: 'white',
+      },
+    },
+  };
+
   return (
     <>
       <GlobalStyle />
+      <Navbar {...props} />
       <BrowserRouter>
         <Route exact path="/">
           <Home />
