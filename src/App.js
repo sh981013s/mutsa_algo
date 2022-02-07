@@ -1,5 +1,5 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Home, Solve, Result } from './pages/index';
+import { Home, Solve, Result, Problems } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
 import 'responsive-navbar-react/dist/index.css';
@@ -13,6 +13,10 @@ function App() {
       },
       {
         text: '문제',
+        link: '/Problems',
+      },
+      {
+        text: '제출내역',
         link: '#docs',
       },
     ],
@@ -37,6 +41,9 @@ function App() {
       <BrowserRouter>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/problems">
+          <Problems />
         </Route>
         <Route exact path="/solve">
           <Solve />

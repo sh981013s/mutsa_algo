@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 
 const Solve = () => {
-  const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`);
+  const [code, setCode] = useState(
+    `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
+  );
   useEffect(() => {
     console.log(code);
   }, [code]);
@@ -11,7 +13,7 @@ const Solve = () => {
       value={code}
       language="python"
       placeholder="Please enter JS code."
-      onChange={(evn) => setCode(evn.target.value)}
+      onChange={(e) => setCode(e.target.value)}
       padding={15}
       style={{
         fontSize: 12,
