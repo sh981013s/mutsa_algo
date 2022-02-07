@@ -7,13 +7,8 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;npm install firebase
-  background: rgb(202, 173, 228);
-  background: linear-gradient(
-    180deg,
-    rgba(202, 173, 228, 1) 78%,
-    rgba(134, 139, 229, 1) 100%
-  );
+  height: 100vh;
+  background: #2a2b2d;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,24 +18,24 @@ function App() {
   const props = {
     items: [
       {
-        text: 'Home',
+        text: 'Home 🏠',
         link: '/',
       },
       {
-        text: '문제',
+        text: '문제 📄',
         link: '/Problems',
       },
       {
-        text: '제출내역',
+        text: '제출내역 🙋🏻‍♂️',
         link: '#docs',
       },
     ],
     logo: {
-      text: '멋쟁이 사자처럼 at 국민대 사전과제',
+      text: '🦁 멋쟁이 사자처럼 at 국민대 사전과제',
     },
     style: {
       barStyles: {
-        background: '#868be5',
+        background: '#212325',
       },
       sidebarStyles: {
         background: '#222',

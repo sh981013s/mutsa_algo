@@ -1,5 +1,73 @@
 import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`;
+
+const CodeContainer = styled.div`
+  width: 90%;
+  height: 90%;
+  display: flex;
+`;
+
+const Instruction = styled.div`
+  width: 30%;
+  height: 100%;
+  background: #212325;
+`;
+
+const BoxHead = styled.div`
+  width: 100%;
+  height: 3rem;
+  background: #16181a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Editor = styled.div`
+  padding: 0 5%;
+  width: 70%;
+  height: 100%;
+`;
+
+const Solution = styled.div`
+  //margin: 0 5%;
+  width: 100%;
+  height: 80%;
+`;
+
+const Code = styled(CodeEditor)`
+  width: 100%;
+  height: 100%;
+`;
+
+const SubmitContainer = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SubmitBtn = styled.div`
+  width: 5rem;
+  height: 2rem;
+  background: #5d88d6;
+  margin-top: 3rem;
+  color: black;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Solve = () => {
   const [code, setCode] = useState(
@@ -9,19 +77,34 @@ const Solve = () => {
     console.log(code);
   }, [code]);
   return (
-    <CodeEditor
-      value={code}
-      language="python"
-      placeholder="Please enter JS code."
-      onChange={(e) => setCode(e.target.value)}
-      padding={15}
-      style={{
-        fontSize: 12,
-        backgroundColor: '#f5f5f5',
-        fontFamily:
-          'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-      }}
-    />
+    <Container>
+      <CodeContainer>
+        <Instruction>
+          <BoxHead>Instructions</BoxHead>
+        </Instruction>
+        <Editor>
+          <Solution>
+            <BoxHead>Solution</BoxHead>
+            <Code
+              value={code}
+              language="python"
+              placeholder="Please enter JS code."
+              onChange={(e) => setCode(e.target.value)}
+              padding={15}
+              style={{
+                fontSize: 12,
+                backgroundColor: '#131414',
+                fontFamily:
+                  'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+              }}
+            />
+          </Solution>
+          <SubmitContainer>
+            <SubmitBtn>Submit</SubmitBtn>
+          </SubmitContainer>
+        </Editor>
+      </CodeContainer>
+    </Container>
   );
 };
 
