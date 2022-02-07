@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Router } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { Home, Solve } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 
