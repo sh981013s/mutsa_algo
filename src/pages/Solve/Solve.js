@@ -1,7 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styled from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
+
+import marked from 'marked';
+import Prism from 'prismjs';
+
+import MarkDownRenderer from '../../components/MarkDownRenderer';
+
+/*import Markdown from 'marked-react';
+import Lowlight from 'react-lowlight';
+import markdown from 'highlight.js/lib/languages/markdown';*/
+
+// import ReactMarkdown from 'react-markdown';
+
+// import '@/style/prism.css';
 
 const Container = styled.div`
   width: 100%;
@@ -69,12 +82,11 @@ const SubmitBtn = styled.div`
   align-items: center;
 `;
 
-const MarkDown = styled(MDEditor.Markdown)`
+const MarkDown = styled(MarkDownRenderer)`
   width: 90%;
   height: 90%;
-  padding: 1rem;
+  padding: 3rem;
   overflow-y: scroll;
-  //height: 'calc(100vh - 127px)'
 `;
 
 const Solve = () => {
@@ -82,54 +94,18 @@ const Solve = () => {
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
 
-  const markdown = `A paragraph with *emphasis* and **strong importance**.
-
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |
-`;
+  const body = `# test\n\n## test\n\n### test\n\n---\n\n- dasdasdaasd\n- asdasdasdas\n`;
 
   return (
     <Container>
       <CodeContainer>
         <Instruction>
           <BoxHead>Instructions</BoxHead>
-          <MarkDown source={markdown} enableScroll="true" />
+          {/*<ReactMarkdown children={tmp} remarkPlugins={[remarkGfm]} />,*/}
+          {/*<MarkDown source={tmp} enableScroll="true" />*/}
+          {/*<div className="markdown-render" dangerouslySetInnerHTML={markup} />*/}
+          {/*<div className="markdown-render" dangerouslySetInnerHTML={markup} />*/}
+          <MarkDown body={body} />
         </Instruction>
         <Editor>
           <Solution>

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import styled from 'styled-components';
-import * as React from 'react';
 import { NewBtn, StyledLink } from '../Problems/Problems';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 
 const Instruction = styled.p`
   font-size: 1.3rem;
@@ -23,27 +25,46 @@ const Main = styled.div`
   width: 80%;
 `;
 
+const Title = styled.input`
+  margin-bottom: 1rem;
+  width: 30%;
+  height: 5%;
+`;
+
 const NewQuestion = () => {
-  const [value, setValue] = useState('**문제 출제 화이팅이요 ㅎㅎ**');
+  const [value, setValue] = useState(`**문제 출제 화이팅이요 ㅎㅎ**`);
+  const [title, setTitle] = useState('');
+  const [error, setError] = useState(null);
+  const { user } = useAuthContext();
+
   useEffect(() => {
-    console.log(value);
+    console.log(user);
   }, [value]);
 
-  const data = `**Hello world!!!**
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
-----
-
-asdasdasdasda
-
-## asdasdasdads`;
+  const submitProb = () => {
+    addDoc(collection(db, 'probs'), {
+      writer: user.displayName,
+      title: title,
+      instruction: value,
+    });
+  };
 
   return (
     <Container>
       <Main>
         <Instruction>마크다운 형식으로 기입해주세요 😃</Instruction>
+        <Title
+          type="text"
+          placeholder="문제 이름"
+          onChange={handleTitleChange}
+        />
         <MDEditor value={value} onChange={setValue} width={500} height={500} />
         <StyledLink to="/newQuestion">
-          <NewBtn>문제 등록</NewBtn>
+          <NewBtn onClick={submitProb}>문제 등록</NewBtn>
         </StyledLink>
       </Main>
     </Container>

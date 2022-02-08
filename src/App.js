@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import {
   Home,
   Solve,
@@ -63,21 +63,27 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/problems">
+              {!user && <Redirect to="/login" />}
               <Problems />
             </Route>
             <Route exact path="/solve">
+              {!user && <Redirect to="/login" />}
               <Solve />
             </Route>
             <Route exact path="/result">
+              {!user && <Redirect to="/login" />}
               <Result />
             </Route>
             <Route exact path="/newQuestion">
+              {!user && <Redirect to="/login" />}
               <NewQuestion />
             </Route>
             <Route exact path="/login">
+              {user && <Redirect to="/" />}
               <Login />
             </Route>
             <Route exact path="/Submitted">
+              {!user && <Redirect to="/login" />}
               <Submitted />
             </Route>
           </BrowserRouter>
