@@ -13,7 +13,7 @@ const Container = styled.div`
   color: white;
 
   div {
-    margin-top: 4rem;
+    margin-top: 10rem;
   }
 
   img {

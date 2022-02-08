@@ -39,9 +39,9 @@ function createData(num, name) {
 
 const rows = [
   createData(1, '별찍기'),
-  createData(1, '별찍기'),
-  createData(1, '별찍기'),
-  createData(1, '별찍기'),
+  createData(2, '별찍기'),
+  createData(3, '별찍기'),
+  createData(4, '별찍기'),
 ];
 
 const Container = styled.div`
@@ -87,7 +87,7 @@ export default function Problems() {
             <TableHead>
               <TableRow>
                 <StyledTableCell>#</StyledTableCell>
-                <StyledTableCell align="middle">문제</StyledTableCell>
+                <StyledTableCell align="center">문제</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -96,7 +96,7 @@ export default function Problems() {
                   <StyledTableCell component="th" scope="row">
                     {row.num}
                   </StyledTableCell>
-                  <StyledTableCell align="middle">{row.name}</StyledTableCell>
+                  <StyledTableCell align="center">{row.name}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

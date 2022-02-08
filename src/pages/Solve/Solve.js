@@ -71,8 +71,10 @@ const SubmitBtn = styled.div`
 
 const MarkDown = styled(MDEditor.Markdown)`
   width: 90%;
-  height: 95%;
+  height: 90%;
   padding: 1rem;
+  overflow-y: scroll;
+  //height: 'calc(100vh - 127px)'
 `;
 
 const Solve = () => {
@@ -92,6 +94,34 @@ A table:
 
 | a | b |
 | - | - |
+> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |
 `;
 
   return (
@@ -99,7 +129,7 @@ A table:
       <CodeContainer>
         <Instruction>
           <BoxHead>Instructions</BoxHead>
-          <MarkDown source={markdown} />
+          <MarkDown source={markdown} enableScroll="true" />
         </Instruction>
         <Editor>
           <Solution>
