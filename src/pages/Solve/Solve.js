@@ -7,6 +7,8 @@ import marked from 'marked';
 import Prism from 'prismjs';
 
 import MarkDownRenderer from '../../components/MarkDownRenderer';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 
 /*import Markdown from 'marked-react';
 import Lowlight from 'react-lowlight';
@@ -94,6 +96,18 @@ const Solve = () => {
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
 
+  useEffect(() => {
+    console.log(code, 'ccc');
+  }, [code]);
+
+  const submitProb = () => {
+    addDoc(collection(db, 'submitted'), {
+      // writer: user.displayName,
+      // title: title,
+      sourceCode: code,
+    });
+  };
+
   const body = `# 안녕\n\n## 안뇽뇽\n\n### 안냥냥\n\n---\n\n- ㅋ\n- ㄴ\n- ㄷ`;
 
   return (
@@ -125,7 +139,7 @@ const Solve = () => {
             />
           </Solution>
           <SubmitContainer>
-            <SubmitBtn>Submit</SubmitBtn>
+            <SubmitBtn onClick={submitProb}>Submit</SubmitBtn>
           </SubmitContainer>
         </Editor>
       </CodeContainer>

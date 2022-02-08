@@ -5,3 +5,4 @@ export { default as Problems } from './Problems/Problems';
 export { default as NewQuestion } from './NewQuestion/NewQuestion';
 export { default as Login } from './Login/Login';
 export { default as Submitted } from './Submitted/Submitted';
+export { default as SubmittedDetail } from './SubmittedDetail/SubmittedDetail';

@@ -7,6 +7,7 @@ import {
   NewQuestion,
   Login,
   Submitted,
+  SubmittedDetail,
 } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
@@ -85,6 +86,10 @@ function App() {
             <Route exact path="/Submitted">
               {!user && <Redirect to="/login" />}
               <Submitted />
+            </Route>
+            <Route exact path="/SubmittedDetail">
+              {!user && <Redirect to="/login" />}
+              <SubmittedDetail />
             </Route>
           </BrowserRouter>
         )}

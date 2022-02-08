@@ -9,6 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { db } from '../../firebase/firebaseConfig';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -79,6 +82,31 @@ export const NewBtn = styled.button`
 `;
 
 export default function Problems() {
+  let ref = collection(db, 'probs');
+  ref = query(ref);
+
+  const unsub = onSnapshot(ref, (snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      console.log(doc);
+    });
+  });
+
+  useEffect(() => {
+    let ref = collection(db, 'probs');
+    ref = query(ref);
+
+    const unsub = onSnapshot(ref, (snapshot) => {
+      console.log(
+        snapshot.docs[0]._document.data.value.mapValue.fields,
+        'snap'
+      );
+      snapshot.docs.forEach((doc) => {
+        console.log(doc[0], 'doc');
+      });
+    });
+    return () => unsub();
+  }, []);
+
   return (
     <Container>
       <div>
