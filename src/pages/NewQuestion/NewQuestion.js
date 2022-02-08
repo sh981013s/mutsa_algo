@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import MDEditor from '@uiw/react-md-editor';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NewBtn, StyledLink } from '../Problems/Problems';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -7,27 +6,28 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 import MarkdownEditor from '../../components/MarkdownEditor';
 import MarkdownPreview from '../../components/MarkdownPreview';
+import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
-  //justify-content: center;
 `;
 
-const Pannel = styled.div`
+const Panel = styled.div`
   display: flex;
   position: relative;
-  flex: 0.5 1 0;
 `;
 
-const Left = styled(Pannel)`
+const Left = styled(Panel)`
+  width: 50%;
   background-color: rgb(38, 50, 56);
   flex-direction: column;
   min-height: 100vh;
 `;
 
-const Right = styled(Pannel)`
+const Right = styled(Panel)`
+  width: 50%;
   background-color: #fff;
 `;
 
@@ -49,15 +49,10 @@ const TitleContainer = styled.div`
   }
 `;
 
-const Editor = styled(MarkdownEditor)`
-  width: 100%;
-  min-height: 100vh;
-`;
-
 const NewQuestion = () => {
   const [value, setValue] = useState(`**문제 출제 화이팅이요 ㅎㅎ**`);
   const [title, setTitle] = useState('제목을 입력해주세요');
-  const [error, setError] = useState(null);
+  const history = useHistory();
   const { user } = useAuthContext();
 
   const handleTitleChange = (e) => {
@@ -68,12 +63,13 @@ const NewQuestion = () => {
     console.log(value, 'val');
   }, [value]);
 
-  const submitProb = () => {
-    addDoc(collection(db, 'probs'), {
+  const submitProb = async () => {
+    await addDoc(collection(db, 'probs/'), {
       writer: user.displayName,
       title: title,
       instruction: value,
     });
+    history.push('/problems');
   };
 
   return (
@@ -81,15 +77,15 @@ const NewQuestion = () => {
       <Left>
         <TitleContainer>
           <input type="text" placeholder={title} onChange={handleTitleChange} />
+          <StyledLink to="/newQuestion">
+            <NewBtn onClick={submitProb}>문제 등록</NewBtn>
+          </StyledLink>
         </TitleContainer>
         <MarkdownEditor body={value} edit={setValue} />
       </Left>
       <Right>
-        <MarkdownPreview title={title} body={value}></MarkdownPreview>
+        <MarkdownPreview title={title} body={value} />
       </Right>
-      <StyledLink to="/newQuestion">
-        <NewBtn onClick={submitProb}>문제 등록</NewBtn>
-      </StyledLink>
     </Container>
   );
 };

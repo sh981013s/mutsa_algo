@@ -97,7 +97,7 @@ export default function Problems() {
 
     const unsub = onSnapshot(ref, (snapshot) => {
       console.log(
-        snapshot.docs[0]._document.data.value.mapValue.fields,
+        snapshot.docs[0]._document.data.value.mapValue.fields.cnt.integerValue,
         'snap'
       );
       snapshot.docs.forEach((doc) => {
@@ -114,16 +114,12 @@ export default function Problems() {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>#</StyledTableCell>
                 <StyledTableCell align="center">문제</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.num}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.num}
-                  </StyledTableCell>
                   <StyledTableCell align="center">{row.name}</StyledTableCell>
                 </StyledTableRow>
               ))}
