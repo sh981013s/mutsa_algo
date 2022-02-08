@@ -1,34 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import styled from 'styled-components';
 import { NewBtn, StyledLink } from '../Problems/Problems';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
-
-const Instruction = styled.p`
-  font-size: 1.3rem;
-  color: white;
-  text-align: center;
-  margin-bottom: 3rem;
-`;
+import MarkdownEditor from '../../components/MarkdownEditor';
 
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  //justify-content: center;
 `;
 
-const Main = styled.div`
-  margin-top: 3rem;
-  width: 80%;
+const Pannel = styled.div`
+  display: flex;
+  position: relative;
+  flex: 0.5 1 0;
 `;
 
-const Title = styled.input`
-  margin-bottom: 1rem;
-  width: 30%;
-  height: 5%;
+const Left = styled(Pannel)`
+  background-color: rgb(38, 50, 56);
+  flex-direction: column;
+`;
+
+const Right = styled(Pannel)`
+  background-color: #fff;
+`;
+
+const TitleContainer = styled.div`
+  position: relative;
+  z-index: 15;
+  height: 4rem;
+  display: flex;
+  color: #fff;
+  background-color: rgb(52, 58, 64);
+  width: 100%;
+  input {
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    border-style: none;
+    outline: none;
+    font-size: 1.25rem;
+    width: 100%;
+  }
 `;
 
 const NewQuestion = () => {
@@ -36,10 +52,6 @@ const NewQuestion = () => {
   const [title, setTitle] = useState('');
   const [error, setError] = useState(null);
   const { user } = useAuthContext();
-
-  useEffect(() => {
-    console.log(user);
-  }, [value]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -49,24 +61,26 @@ const NewQuestion = () => {
     addDoc(collection(db, 'probs'), {
       writer: user.displayName,
       title: title,
-      instruction: value,
+      instruction: title,
     });
   };
 
   return (
     <Container>
-      <Main>
-        <Instruction>마크다운 형식으로 기입해주세요 😃</Instruction>
-        <Title
-          type="text"
-          placeholder="문제 이름"
-          onChange={handleTitleChange}
-        />
-        <MDEditor value={value} onChange={setValue} width={500} height={500} />
-        <StyledLink to="/newQuestion">
-          <NewBtn onClick={submitProb}>문제 등록</NewBtn>
-        </StyledLink>
-      </Main>
+      <Left>
+        <TitleContainer>
+          <input
+            type="text"
+            placeholder="문제 이름"
+            onChange={handleTitleChange}
+          />
+        </TitleContainer>
+        <MarkdownEditor body={value} edit={setValue} />
+      </Left>
+      <Right></Right>
+      {/*      <StyledLink to="/newQuestion">
+        <NewBtn onClick={submitProb}>문제 등록</NewBtn>
+      </StyledLink>*/}
     </Container>
   );
 };

@@ -94,7 +94,7 @@ const Solve = () => {
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
 
-  const body = `# test\n\n## test\n\n### test\n\n---\n\n- dasdasdaasd\n- asdasdasdas\n`;
+  const body = `# 안녕\n\n## 안뇽뇽\n\n### 안냥냥\n\n---\n\n- ㅋ\n- ㄴ\n- ㄷ`;
 
   return (
     <Container>
