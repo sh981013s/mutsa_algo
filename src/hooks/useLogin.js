@@ -1,4 +1,4 @@
-import { auth } from '../firebase/firebaseConfig';
+import { auth, signInWithGoogle } from '../firebase/firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { useAuthContext } from '../../../mutsa_algo/src/hooks/useAuthContext';
@@ -7,9 +7,9 @@ export const useLogin = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const login = (email, password) => {
+  const login = () => {
     setError(null);
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithGoogle()
       .then((res) => {
         dispatch({ type: 'LOGIN', payload: res.user });
       })

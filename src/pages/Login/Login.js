@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import GoogleIcon from '@mui/icons-material/Google';
+import { useLogin } from '../../hooks/useLogin';
 
 const Container = styled.div`
   width: 100%;
@@ -48,11 +49,13 @@ const Icon = styled(GoogleIcon)`
 `;
 
 const Login = () => {
+  const { login, error } = useLogin();
+
   return (
     <Container>
       <Main>
         <h1>Login</h1>
-        <div>
+        <div onClick={login}>
           Login with Google
           <Icon />
         </div>
