@@ -1,4 +1,4 @@
-import MarkdownRender from '../components/MarkDownRenderer';
+import MarkdownRender from './MarkDownRenderer';
 import styled from 'styled-components';
 
 const MarkdownPreview = ({ title, body }) => {

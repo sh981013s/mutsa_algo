@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@uiw/react-md-editor": "^3.9.4",
     "@uiw/react-textarea-code-editor": "^1.4.16",
     "codemirror": "^5.49.0",
     "firebase": "^9.6.6",

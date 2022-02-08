@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { db } from '../../firebase/firebaseConfig';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
@@ -35,17 +35,6 @@ const StyledTableRow = Styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-function createData(num, name) {
-  return { num, name };
-}
-
-const rows = [
-  createData(1, '별찍기'),
-  createData(2, '별찍기'),
-  createData(3, '별찍기'),
-  createData(4, '별찍기'),
-];
 
 const Container = styled.div`
   width: 100%;
@@ -81,7 +70,19 @@ export const NewBtn = styled.button`
   }
 `;
 
+function createData(num, name) {
+  return { num, name };
+}
+
+const rows = [
+  createData(1, '별찍기'),
+  createData(2, '별찍기'),
+  createData(3, '별찍기'),
+  createData(4, '별찍기'),
+];
+
 export default function Problems() {
+  const [problems, setProblems] = useState([]);
   let ref = collection(db, 'probs');
   ref = query(ref);
 
@@ -96,12 +97,12 @@ export default function Problems() {
     ref = query(ref);
 
     const unsub = onSnapshot(ref, (snapshot) => {
-      console.log(
+      /*      console.log(
         snapshot.docs[0]._document.data.value.mapValue.fields.cnt.integerValue,
         'snap'
-      );
+      );*/
       snapshot.docs.forEach((doc) => {
-        console.log(doc[0], 'doc');
+        console.log(doc._document.data.value.mapValue.fields, 'doc');
       });
     });
     return () => unsub();

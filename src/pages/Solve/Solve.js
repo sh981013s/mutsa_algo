@@ -6,7 +6,7 @@ import MDEditor from '@uiw/react-md-editor';
 import marked from 'marked';
 import Prism from 'prismjs';
 
-import MarkDownRenderer from '../../components/MarkDownRenderer';
+import MarkDownRenderer from '../../components/NewQuestion/MarkDownRenderer';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 

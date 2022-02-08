@@ -4,8 +4,8 @@ import { NewBtn, StyledLink } from '../Problems/Problems';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
-import MarkdownEditor from '../../components/MarkdownEditor';
-import MarkdownPreview from '../../components/MarkdownPreview';
+import MarkdownEditor from '../../components/NewQuestion/MarkdownEditor';
+import MarkdownPreview from '../../components/NewQuestion/MarkdownPreview';
 import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
@@ -58,10 +58,6 @@ const NewQuestion = () => {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
-
-  useEffect(() => {
-    console.log(value, 'val');
-  }, [value]);
 
   const submitProb = async () => {
     await addDoc(collection(db, 'probs/'), {

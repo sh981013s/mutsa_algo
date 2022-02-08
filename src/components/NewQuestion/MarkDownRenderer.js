@@ -36,7 +36,6 @@ const MarkdownRender = ({ body }) => {
   useMemo(() => handleHtmlChange(), [body]);
 
   const markup = { __html: html };
-  console.log(markup);
 
   return (
     <>
