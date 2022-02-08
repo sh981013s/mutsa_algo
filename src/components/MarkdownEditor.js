@@ -54,6 +54,9 @@ const MarkdownEditor = ({ body, edit }) => {
           position: absolute;
           width: 1000px;
         }
+        .editor {
+          min-height: 90vh;
+        }
       `}</style>
     </div>
   );

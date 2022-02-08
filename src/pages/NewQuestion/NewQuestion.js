@@ -6,6 +6,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 import MarkdownEditor from '../../components/MarkdownEditor';
+import MarkdownPreview from '../../components/MarkdownPreview';
 
 const Container = styled.div`
   width: 100%;
@@ -23,6 +24,7 @@ const Pannel = styled.div`
 const Left = styled(Pannel)`
   background-color: rgb(38, 50, 56);
   flex-direction: column;
+  min-height: 100vh;
 `;
 
 const Right = styled(Pannel)`
@@ -47,9 +49,14 @@ const TitleContainer = styled.div`
   }
 `;
 
+const Editor = styled(MarkdownEditor)`
+  width: 100%;
+  min-height: 100vh;
+`;
+
 const NewQuestion = () => {
   const [value, setValue] = useState(`**문제 출제 화이팅이요 ㅎㅎ**`);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('제목을 입력해주세요');
   const [error, setError] = useState(null);
   const { user } = useAuthContext();
 
@@ -57,11 +64,15 @@ const NewQuestion = () => {
     setTitle(e.target.value);
   };
 
+  useEffect(() => {
+    console.log(value, 'val');
+  }, [value]);
+
   const submitProb = () => {
     addDoc(collection(db, 'probs'), {
       writer: user.displayName,
       title: title,
-      instruction: title,
+      instruction: value,
     });
   };
 
@@ -69,18 +80,16 @@ const NewQuestion = () => {
     <Container>
       <Left>
         <TitleContainer>
-          <input
-            type="text"
-            placeholder="문제 이름"
-            onChange={handleTitleChange}
-          />
+          <input type="text" placeholder={title} onChange={handleTitleChange} />
         </TitleContainer>
         <MarkdownEditor body={value} edit={setValue} />
       </Left>
-      <Right></Right>
-      {/*      <StyledLink to="/newQuestion">
+      <Right>
+        <MarkdownPreview title={title} body={value}></MarkdownPreview>
+      </Right>
+      <StyledLink to="/newQuestion">
         <NewBtn onClick={submitProb}>문제 등록</NewBtn>
-      </StyledLink>*/}
+      </StyledLink>
     </Container>
   );
 };
