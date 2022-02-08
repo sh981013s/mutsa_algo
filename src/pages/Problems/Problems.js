@@ -83,27 +83,24 @@ const rows = [
 
 export default function Problems() {
   const [problems, setProblems] = useState([]);
-  let ref = collection(db, 'probs');
-  ref = query(ref);
-
-  const unsub = onSnapshot(ref, (snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      console.log(doc);
-    });
-  });
 
   useEffect(() => {
+    const tmp = [];
     let ref = collection(db, 'probs');
     ref = query(ref);
 
     const unsub = onSnapshot(ref, (snapshot) => {
-      /*      console.log(
-        snapshot.docs[0]._document.data.value.mapValue.fields.cnt.integerValue,
-        'snap'
-      );*/
-      snapshot.docs.forEach((doc) => {
-        console.log(doc._document.data.value.mapValue.fields, 'doc');
+      console.log(snapshot.docs, 'snap');
+      // eslint-disable-next-line array-callback-return
+      snapshot.docs.map((doc) => {
+        let single = doc._document.data.value.mapValue.fields;
+        tmp.push({
+          title: single.title.stringValue,
+          writer: single.writer.stringValue,
+          instruction: single.instruction.stringValue,
+        });
       });
+      setProblems(tmp);
     });
     return () => unsub();
   }, []);
@@ -119,11 +116,14 @@ export default function Problems() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.num}>
-                  <StyledTableCell align="center">{row.name}</StyledTableCell>
-                </StyledTableRow>
-              ))}
+              {problems.length > 0 &&
+                problems.map((single) => (
+                  <StyledTableRow key={single.title}>
+                    <StyledTableCell align="center">
+                      {single.title}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
