@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import MDEditor from '@uiw/react-md-editor';
 
 const Container = styled.div`
   width: 100%;
@@ -21,7 +20,7 @@ const CodeContainer = styled.div`
 
 const Instruction = styled.div`
   width: 30%;
-  height: 100%;
+  height: 84%;
   background: #212325;
 `;
 
@@ -70,7 +69,7 @@ const SubmitBtn = styled.div`
   align-items: center;
 `;
 
-const MarkDown = styled(ReactMarkdown)`
+const MarkDown = styled(MDEditor.Markdown)`
   width: 90%;
   height: 95%;
   padding: 1rem;
@@ -100,7 +99,7 @@ A table:
       <CodeContainer>
         <Instruction>
           <BoxHead>Instructions</BoxHead>
-          <MarkDown children={markdown} remarkPlugins={[remarkGfm]} />
+          <MarkDown source={markdown} />
         </Instruction>
         <Editor>
           <Solution>

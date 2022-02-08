@@ -65,13 +65,14 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-const NewBtn = styled.button`
+export const NewBtn = styled.button`
   width: 8rem;
   height: 2.3rem;
   margin-top: 1rem;
-  background: rgba(49, 43, 43, 0.49);
+  background: rgba(0, 0, 0, 0.49);
   color: white;
   border-radius: 2rem;
+
   &:hover {
     cursor: pointer;
   }

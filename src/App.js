@@ -4,17 +4,17 @@ import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
 import 'responsive-navbar-react/dist/index.css';
 import styled from 'styled-components';
+import { useAuthContext } from './hooks/useAuthContext';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #2a2b2d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 function App() {
+  const { user, authIsReady } = useAuthContext();
+
   const props = {
     items: [
       {
@@ -49,23 +49,25 @@ function App() {
       <GlobalStyle />
       <Navbar {...props} />
       <Container>
-        <BrowserRouter>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/problems">
-            <Problems />
-          </Route>
-          <Route exact path="/solve">
-            <Solve />
-          </Route>
-          <Route exact path="/result">
-            <Result />
-          </Route>
-          <Route exact path="/newQuestion">
-            <NewQuestion />
-          </Route>
-        </BrowserRouter>
+        {authIsReady && (
+          <BrowserRouter>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/problems">
+              <Problems />
+            </Route>
+            <Route exact path="/solve">
+              <Solve />
+            </Route>
+            <Route exact path="/result">
+              <Result />
+            </Route>
+            <Route exact path="/newQuestion">
+              <NewQuestion />
+            </Route>
+          </BrowserRouter>
+        )}
       </Container>
     </>
   );

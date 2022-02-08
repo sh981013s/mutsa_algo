@@ -12,6 +12,10 @@ const Container = styled.div`
   line-height: 2rem;
   color: white;
 
+  div {
+    margin-top: 4rem;
+  }
+
   img {
     width: 20%;
     height: 20%;
@@ -22,6 +26,15 @@ const Container = styled.div`
 
 const Last = styled.p`
   margin-top: 3rem;
+`;
+
+const Link = styled.a`
+  margin-top: 3rem;
+  color: yellow;
+  text-decoration: none;
+  border: 1px solid #fff;
+  border-radius: 2rem;
+  padding: 0 1rem;
 `;
 
 const Home = () => {
@@ -37,8 +50,11 @@ const Home = () => {
           <br />
         </p>
         <Last>
-          문의: 010-9302-1013 이승환 (전화 혹은 카톡으로 문의해주세요!)
+          문의: 010-9302-1013 이승환 <br />
         </Last>
+        <Link href="https://open.kakao.com/o/sVpSIOYd/" target="blank">
+          1:1 오픈챗 문의 👍
+        </Link>
       </div>
     </Container>
   );
