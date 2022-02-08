@@ -6,6 +6,7 @@ import {
   Problems,
   NewQuestion,
   Login,
+  Submitted,
 } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
@@ -34,7 +35,7 @@ function App() {
       },
       {
         text: '제출내역 🙋🏻‍♂️',
-        link: '#docs',
+        link: '/Submitted',
       },
     ],
     logo: {
@@ -75,6 +76,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/Submitted">
+              <Submitted />
             </Route>
           </BrowserRouter>
         )}
