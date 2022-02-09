@@ -16,6 +16,26 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
+  div {
+    h2 {
+      margin-bottom: 1rem;
+    }
+    div {
+      margin-top: 1em;
+      text-align: center;
+      button {
+        margin: 0.5rem;
+        background: none;
+        border: none;
+        color: white;
+        width: 4rem;
+        font-size: 1rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 `;
 
 const SubmittedDetail = () => {
@@ -68,11 +88,19 @@ const SubmittedDetail = () => {
 
   return (
     <Container>
-      <SyntaxHighlighter language="javascript" style={docco}>
-        {sourceCode}
-      </SyntaxHighlighter>
-      <button onClick={correctHandler}>✅ 정답</button>
-      <button onClick={incorrectHandler}>❌ 오답</button>
+      <div>
+        <h1>📄 문제명: {title}</h1>
+        <h2>🙋🏻‍♀️ 제출자: {user.displayName}</h2>
+        <h2>🧮 제출코드</h2>
+        <hr />
+        <SyntaxHighlighter language="javascript" style={docco}>
+          {sourceCode}
+        </SyntaxHighlighter>
+        <div>
+          <button onClick={correctHandler}>✅ 정답</button>
+          <button onClick={incorrectHandler}>❌ 오답</button>
+        </div>
+      </div>
     </Container>
   );
 };

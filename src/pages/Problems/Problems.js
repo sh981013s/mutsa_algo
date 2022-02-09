@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/firebaseConfig';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import isProved from '../../utils/provedEmails';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -78,6 +80,7 @@ export const TableLink = styled(StyledLink)`
 `;
 
 export default function Problems() {
+  const { user } = useAuthContext();
   const [problems, setProblems] = useState([]);
 
   useEffect(() => {
@@ -124,9 +127,11 @@ export default function Problems() {
             </TableBody>
           </Table>
         </StyledTable>
-        <StyledLink to="/newQuestion">
-          <NewBtn>문제 등록</NewBtn>
-        </StyledLink>
+        {isProved(user.email) && (
+          <StyledLink to="/newQuestion">
+            <NewBtn>문제 등록</NewBtn>
+          </StyledLink>
+        )}
       </div>
     </Container>
   );

@@ -7,18 +7,17 @@ import styled from 'styled-components';
 import { TableLink } from '../Problems/Problems';
 
 const Container = styled.div`
-  width: 100%;
+  width: 98vw;
   min-height: 100vh;
   color: white;
   display: flex;
   flex-wrap: wrap;
-  /*  justify-content: center;
-  align-items: center;*/
-  padding: 2rem;
+  padding: 1vw 0 0 1vw;
 `;
 
 const FlexCell = styled.div`
-  width: 33%;
+  padding: 1vw;
+  width: 30%;
   height: 30vh;
   border-bottom: 1px solid #ffff;
   h2 {
