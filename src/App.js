@@ -1,4 +1,4 @@
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import {
   Home,
   Solve,
@@ -79,7 +79,7 @@ function App() {
       <Navbar {...menu} />
       <Container>
         {authIsReady && (
-          <BrowserRouter>
+          <Switch>
             <Route exact path="/">
               <Home />
             </Route>
@@ -147,7 +147,7 @@ function App() {
               {!user && <Redirect to="/login" />}
               <SetDisplayName />
             </Route>
-          </BrowserRouter>
+          </Switch>
         )}
       </Container>
     </>
