@@ -142,7 +142,7 @@ const Solve = ({ match }) => {
             <Code
               value={code}
               language="python"
-              placeholder="Please enter JS code."
+              placeholder="파이썬 코드를 입력해주세요."
               onChange={(e) => setCode(e.target.value)}
               padding={15}
               style={{

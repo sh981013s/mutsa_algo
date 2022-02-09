@@ -69,7 +69,7 @@ export const NewBtn = styled.button`
   border-radius: 2rem;
 `;
 
-const TableLink = styled(StyledLink)`
+export const TableLink = styled(StyledLink)`
   color: black;
   &:hover {
     cursor: pointer;
@@ -86,7 +86,6 @@ export default function Problems() {
     ref = query(ref);
 
     const unsub = onSnapshot(ref, (snapshot) => {
-      console.log(snapshot.docs, 'snap');
       // eslint-disable-next-line array-callback-return
       snapshot.docs.map((doc) => {
         let single = doc._document.data.value.mapValue.fields;

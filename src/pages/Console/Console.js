@@ -4,6 +4,7 @@ import { db } from '../../firebase/firebaseConfig';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { find } from 'lodash';
 import styled from 'styled-components';
+import { TableLink } from '../Problems/Problems';
 
 const Container = styled.div`
   width: 100%;
@@ -28,8 +29,11 @@ const FlexCell = styled.div`
   }
 `;
 
+const ConsoleLink = styled(TableLink)`
+  color: white;
+`;
+
 const Console = () => {
-  const { user } = useAuthContext();
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -80,16 +84,34 @@ const Console = () => {
           return (
             <FlexCell key={person.name}>
               <h2>👩‍🌾 {person.name}</h2>
-              <p>
+              <h4>
                 {person.cnt} / {total} (정답 / 총합)
-              </p>
+              </h4>
               {person.title.map((title) => {
                 if (title.isCorrect === 'true') {
-                  return <p key={title.title}>📄 {title.title} ✅</p>;
+                  return (
+                    <ConsoleLink
+                      to={`/SubmittedDetail/${person.name}/${title.title}`}
+                    >
+                      <p key={title.title}>📄 {title.title} ✅</p>
+                    </ConsoleLink>
+                  );
                 } else if (title.isCorrect === 'false') {
-                  return <p key={title.title}>📄 {title.title} ❌</p>;
+                  return (
+                    <ConsoleLink
+                      to={`/SubmittedDetail/${person.name}/${title.title}`}
+                    >
+                      <p key={title.title}>📄 {title.title} ❌</p>
+                    </ConsoleLink>
+                  );
                 } else {
-                  return <p key={title.title}>📄 {title.title}</p>;
+                  return (
+                    <ConsoleLink
+                      to={`/SubmittedDetail/${person.name}/${title.title}`}
+                    >
+                      <p key={title.title}>📄 {title.title}</p>
+                    </ConsoleLink>
+                  );
                 }
               })}
             </FlexCell>
