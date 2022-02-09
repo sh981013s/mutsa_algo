@@ -49,7 +49,7 @@ const Icon = styled(GoogleIcon)`
 `;
 
 const Login = () => {
-  const { login, error } = useLogin();
+  const { login } = useLogin();
 
   return (
     <Container>

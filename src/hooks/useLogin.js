@@ -1,5 +1,4 @@
-import { auth, signInWithGoogle } from '../firebase/firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithGoogle } from '../firebase/firebaseConfig';
 import { useState } from 'react';
 import { useAuthContext } from '../../../mutsa_algo/src/hooks/useAuthContext';
 

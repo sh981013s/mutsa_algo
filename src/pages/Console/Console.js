@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
-import { useAuthContext } from '../../hooks/useAuthContext';
 import { find } from 'lodash';
 import styled from 'styled-components';
 import { TableLink } from '../Problems/Problems';

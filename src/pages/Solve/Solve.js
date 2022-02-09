@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styled from 'styled-components';
 import MarkDownRenderer from '../../components/NewQuestion/MarkDownRenderer';
@@ -12,7 +12,6 @@ import {
 import { db } from '../../firebase/firebaseConfig';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { Left, Right, TitleContainer } from '../NewQuestion/NewQuestion';
 
 const Container = styled.div`
   width: 100%;

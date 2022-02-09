@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { NewBtn, StyledLink } from '../Problems/Problems';
 import { useAuthContext } from '../../hooks/useAuthContext';

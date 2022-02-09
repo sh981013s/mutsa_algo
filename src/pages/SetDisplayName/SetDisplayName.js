@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Container, Main } from '../Login/Login';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 

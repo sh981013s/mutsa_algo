@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/firebaseConfig';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 import isProved from '../../utils/provedEmails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
