@@ -57,7 +57,6 @@ const Console = () => {
             ],
             cnt: single.isCorrect.stringValue === 'true' ? 1 : 0,
           });
-          console.log(single.isCorrect.stringValue, 'res');
         } else {
           res = res.filter((fil) => fil.name !== tmp.name);
           res.push({
@@ -73,10 +72,8 @@ const Console = () => {
             cnt:
               single.isCorrect.stringValue === 'true' ? tmp.cnt + 1 : tmp.cnt,
           });
-          console.log(single.isCorrect.stringValue, 'res');
         }
       });
-      console.log(res, 'doc');
 
       setUserList(res);
     });
