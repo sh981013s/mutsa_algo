@@ -84,68 +84,88 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/problems">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : (
+                <Problems />
               )}
-              <Problems />
             </Route>
             <Route exact path="/solve/:title">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : (
+                <Solve />
               )}
-              <Solve />
             </Route>
             <Route exact path="/result">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : (
+                <Result />
               )}
-              <Result />
             </Route>
             <Route exact path="/newQuestion">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : !isProved(user?.email) ? (
+                <Redirect to="/" />
+              ) : (
+                <NewQuestion />
               )}
-              <NewQuestion />
             </Route>
             <Route exact path="/login">
-              {user && <Redirect to="/" />}
-              <Login />
+              {user ? <Redirect to="/" /> : <Login />}
             </Route>
             <Route exact path="/submitted">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : (
+                <Submitted />
               )}
-              <Submitted />
             </Route>
             <Route exact path="/SubmittedDetail/:name/:title/:id">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : !isProved(user?.email) ? (
+                <Redirect to="/" />
+              ) : (
+                <SubmittedDetail />
               )}
-              <SubmittedDetail />
             </Route>
             <Route exact path="/SubmittedSourceCode/:name/:title/:id">
-              {!user && <Redirect to="/login" />}
-              {!user?.displayName.includes('20') && (
+              {user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : (
+                <SubmittedSourceCode />
               )}
-              <SubmittedSourceCode />
             </Route>
             <Route exact path="/console">
-              {!isProved(user?.email) && <Redirect to="/" />}
-              {!user?.displayName.includes('20') && (
+              {!user ? (
+                <Redirect to="/login" />
+              ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
+              ) : !isProved(user?.email) ? (
+                <Redirect to="/" />
+              ) : (
+                <Console />
               )}
-              <Console />
             </Route>
             <Route exact path="/setdisplayname">
-              {!user && <Redirect to="/login" />}
-              <SetDisplayName />
+              {!user ? <Redirect to="/login" /> : <SetDisplayName />}
             </Route>
           </Switch>
         )}

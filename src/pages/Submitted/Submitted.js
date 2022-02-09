@@ -67,24 +67,6 @@ const Submitted = () => {
   const history = useHistory();
   const [submittedProbs, setSubmittedProbs] = useState([]);
 
-  /*  useEffect(() => {
-    if (user) {
-      let ref = collection(db, 'submitted');
-      ref = query(ref, where('writer', '==', user?.displayName));
-      const tmpArr = [];
-      const unsub = onSnapshot(ref, (snapshot) => {
-        snapshot.docs.map((doc) => {
-          tmpArr.push(
-            doc._document.data.value.mapValue.fields.title.stringValue
-          );
-        });
-        const uniqueArr = [...new Set(tmpArr)];
-        setSubmittedProbs(uniqueArr);
-      });
-      return () => unsub();
-    }
-  }, []);*/
-
   useEffect(() => {
     let res = [];
     let ref = collection(db, 'submitted');
