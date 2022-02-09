@@ -22,6 +22,9 @@ const FlexCell = styled.div`
   h2 {
     margin-bottom: 2rem;
   }
+  h4 {
+    margin-bottom: 1.3rem;
+  }
   p {
     margin-bottom: 0.5rem;
   }
