@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 import { useHistory } from 'react-router-dom';
+import { ConsoleLink } from '../Console/Console';
+import { find } from 'lodash';
 
 const Container = styled.div`
   width: 100%;
@@ -65,7 +67,7 @@ const Submitted = () => {
   const history = useHistory();
   const [submittedProbs, setSubmittedProbs] = useState([]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (user) {
       let ref = collection(db, 'submitted');
       ref = query(ref, where('writer', '==', user?.displayName));
@@ -81,6 +83,47 @@ const Submitted = () => {
       });
       return () => unsub();
     }
+  }, []);*/
+
+  useEffect(() => {
+    let res = [];
+    let ref = collection(db, 'submitted');
+    ref = query(ref, where('writer', '==', user?.displayName));
+
+    const unsub = onSnapshot(ref, (snapshot) => {
+      snapshot.docs.map((doc) => {
+        let single = doc._document.data.value.mapValue.fields;
+        const tmp = find(res, { name: single.writer.stringValue });
+        if (!tmp) {
+          res.push({
+            name: single.writer.stringValue,
+            title: [
+              {
+                title: single.title.stringValue,
+                isCorrect: single.isCorrect.stringValue,
+                id: doc.id,
+              },
+            ],
+          });
+        } else {
+          res = res.filter((fil) => fil.name !== tmp.name);
+          res.push({
+            ...tmp,
+            title: [
+              ...tmp.title,
+              {
+                title: single.title.stringValue,
+                isCorrect: single.isCorrect.stringValue,
+                id: doc.id,
+              },
+            ],
+          });
+        }
+      });
+
+      setSubmittedProbs(res);
+    });
+    return () => unsub();
   }, []);
 
   const logoutFunc = async () => {
@@ -100,9 +143,16 @@ const Submitted = () => {
             <div>
               <p>📜 제출완료 문제</p>
               <hr />
-              {submittedProbs.length > 0 &&
-                submittedProbs.map((item) => {
-                  return <p key={item}>👍 {item}</p>;
+              {submittedProbs[0] &&
+                submittedProbs[0].title.map((item) => {
+                  return (
+                    <ConsoleLink
+                      key={item.id}
+                      to={`/SubmittedSourceCode/${user.displayName}/${item.title}/${item.id}`}
+                    >
+                      <p>👍 {item.title}</p>
+                    </ConsoleLink>
+                  );
                 })}
             </div>
           </InnerBox>

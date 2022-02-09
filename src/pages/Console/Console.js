@@ -28,7 +28,7 @@ const FlexCell = styled.div`
   }
 `;
 
-const ConsoleLink = styled(TableLink)`
+export const ConsoleLink = styled(TableLink)`
   color: white;
 `;
 

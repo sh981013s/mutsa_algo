@@ -10,6 +10,7 @@ import {
   SubmittedDetail,
   Console,
   SetDisplayName,
+  SubmittedSourceCode,
 } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
@@ -127,6 +128,13 @@ function App() {
                 <Redirect to="/setdisplayname" />
               )}
               <SubmittedDetail />
+            </Route>
+            <Route exact path="/SubmittedSourceCode/:name/:title/:id">
+              {!user && <Redirect to="/login" />}
+              {!user?.displayName.includes('20') && (
+                <Redirect to="/setdisplayname" />
+              )}
+              <SubmittedSourceCode />
             </Route>
             <Route exact path="/console">
               {!isProved(user?.email) && <Redirect to="/" />}
