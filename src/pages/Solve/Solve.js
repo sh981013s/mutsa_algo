@@ -103,6 +103,7 @@ const Solve = ({ match }) => {
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
   const [instruc, setInstruc] = useState('');
+  const [alreadySolved, setAlreadySolved] = useState(false);
 
   const submitProb = async () => {
     await addDoc(collection(db, 'submitted'), {
@@ -128,6 +129,29 @@ const Solve = ({ match }) => {
       return () => unsub();
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      let ref = collection(db, 'submitted');
+      ref = query(ref, where('title', '==', title));
+
+      const unsub = onSnapshot(ref, (snapshot) => {
+        if (
+          snapshot.docs[0]._document.data.value.mapValue.fields.sourceCode
+            .stringValue
+        ) {
+          setAlreadySolved(true);
+        }
+      });
+      return () => unsub();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (alreadySolved) {
+      history.push('/Problems');
+    }
+  }, [alreadySolved]);
 
   return (
     <Container>

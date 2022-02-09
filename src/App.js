@@ -17,6 +17,7 @@ import 'responsive-navbar-react/dist/index.css';
 import styled from 'styled-components';
 import { useAuthContext } from './hooks/useAuthContext';
 import isProved from './utils/provedEmails';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   width: 100%;
@@ -24,42 +25,57 @@ const Container = styled.div`
   background: #2a2b2d;
 `;
 
+const props = {
+  items: [
+    {
+      text: 'Home 🏠',
+      link: '/',
+    },
+    {
+      text: '문제 📄',
+      link: '/Problems',
+    },
+    {
+      text: '제출내역 🙋🏻‍♂️',
+      link: '/submitted',
+    },
+  ],
+  logo: {
+    text: '🦁 멋쟁이 사자처럼 at 국민대 사전과제',
+  },
+  style: {
+    barStyles: {
+      background: '#212325',
+    },
+    sidebarStyles: {
+      background: '#222',
+      buttonColor: 'white',
+    },
+  },
+};
+
 function App() {
   const { user, authIsReady } = useAuthContext();
+  const [menu, setMenu] = useState(props);
 
-  const props = {
-    items: [
-      {
-        text: 'Home 🏠',
-        link: '/',
-      },
-      {
-        text: '문제 📄',
-        link: '/Problems',
-      },
-      {
-        text: '제출내역 🙋🏻‍♂️',
-        link: '/submitted',
-      },
-    ],
-    logo: {
-      text: '🦁 멋쟁이 사자처럼 at 국민대 사전과제',
-    },
-    style: {
-      barStyles: {
-        background: '#212325',
-      },
-      sidebarStyles: {
-        background: '#222',
-        buttonColor: 'white',
-      },
-    },
-  };
+  useEffect(() => {
+    if (user) {
+      if (isProved(user.email)) {
+        setMenu({
+          ...props,
+          items: [
+            ...props.items,
+            { text: '✅ 전체 제출내역', link: '/Console' },
+          ],
+        });
+      }
+    }
+  }, [user]);
 
   return (
     <>
       <GlobalStyle />
-      <Navbar {...props} />
+      <Navbar {...menu} />
       <Container>
         {authIsReady && (
           <BrowserRouter>

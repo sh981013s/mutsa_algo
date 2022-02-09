@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 import { doc, updateDoc } from 'firebase/firestore';
-
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -93,7 +92,7 @@ const SubmittedDetail = () => {
         <h2>🙋🏻‍♀️ 제출자: {user.displayName}</h2>
         <h2>🧮 제출코드</h2>
         <hr />
-        <SyntaxHighlighter language="javascript" style={docco}>
+        <SyntaxHighlighter language="python" style={a11yDark}>
           {sourceCode}
         </SyntaxHighlighter>
         <div>
