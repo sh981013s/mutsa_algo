@@ -55,8 +55,9 @@ const Console = () => {
                 id: doc.id,
               },
             ],
-            cnt: 0,
+            cnt: single.isCorrect.stringValue === 'true' ? 1 : 0,
           });
+          console.log(single.isCorrect.stringValue, 'res');
         } else {
           res = res.filter((fil) => fil.name !== tmp.name);
           res.push({
@@ -69,8 +70,10 @@ const Console = () => {
                 id: doc.id,
               },
             ],
-            cnt: tmp.cnt + 1,
+            cnt:
+              single.isCorrect.stringValue === 'true' ? tmp.cnt + 1 : tmp.cnt,
           });
+          console.log(single.isCorrect.stringValue, 'res');
         }
       });
       console.log(res, 'doc');
