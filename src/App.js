@@ -67,7 +67,6 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/problems">
-              {/*{!isProved(user?.email) && <Redirect to="/login" />}*/}
               {!user && <Redirect to="/login" />}
               {!user?.displayName.includes('20') && (
                 <Redirect to="/setdisplayname" />

@@ -47,9 +47,10 @@ const Console = () => {
             title: [
               {
                 title: single.title.stringValue,
-                isCorrect: single.isCorrect.booleanValue,
+                isCorrect: single.isCorrect.stringValue,
               },
             ],
+            cnt: 0,
           });
         } else {
           res = res.filter((fil) => fil.name !== tmp.name);
@@ -59,9 +60,10 @@ const Console = () => {
               ...tmp.title,
               {
                 title: single.title.stringValue,
-                isCorrect: single.isCorrect.booleanValue,
+                isCorrect: single.isCorrect.stringValue,
               },
             ],
+            cnt: tmp.cnt + 1,
           });
         }
       });
@@ -74,12 +76,18 @@ const Console = () => {
     <Container>
       {userList.length > 0 &&
         userList.map((person) => {
+          const total = person.title.length;
           return (
             <FlexCell key={person.name}>
               <h2>👩‍🌾 {person.name}</h2>
+              <p>
+                {person.cnt} / {total} (정답 / 총합)
+              </p>
               {person.title.map((title) => {
-                if (title.isCorrect) {
+                if (title.isCorrect === 'true') {
                   return <p key={title.title}>📄 {title.title} ✅</p>;
+                } else if (title.isCorrect === 'false') {
+                  return <p key={title.title}>📄 {title.title} ❌</p>;
                 } else {
                   return <p key={title.title}>📄 {title.title}</p>;
                 }
