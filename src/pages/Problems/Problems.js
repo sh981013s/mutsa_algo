@@ -69,6 +69,9 @@ export const NewBtn = styled.button`
   background: rgba(0, 0, 0, 0.49);
   color: white;
   border-radius: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const TableLink = styled(StyledLink)`

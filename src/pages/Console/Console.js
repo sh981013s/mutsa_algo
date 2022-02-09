@@ -88,7 +88,7 @@ const Console = () => {
           const total = person.title.length;
           return (
             <FlexCell key={person.name}>
-              <h2>👩‍🌾 {person.name}</h2>
+              <h2>👩‍🌾 {person.name} 👩‍🌾</h2>
               <h4>
                 {person.cnt} / {total} (정답 / 총합)
               </h4>

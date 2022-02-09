@@ -21,6 +21,8 @@ export const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
 
   h1 {
     font-style: italic;
@@ -56,7 +58,7 @@ const Login = () => {
       <Main>
         <h1>Login</h1>
         <div onClick={login}>
-          Login with Google
+          Login via Google
           <Icon />
         </div>
       </Main>
