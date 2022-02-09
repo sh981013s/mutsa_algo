@@ -14,6 +14,10 @@ const Container = styled.div`
 
   div {
     margin-top: 10rem;
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
   }
 
   img {
@@ -48,6 +52,10 @@ const Home = () => {
           <br /> 로그인 후 문제 섹션에 가셔서 기제된 문제들을 푸시면 되겠습니다.
           🙇‍♂️ &lt;/p&gt;
           <br />
+        </p>
+        <p>
+          한번 제출한 코드는 '✅전체 제출내역' 에서 '제출한 코드 확인' 후 '삭제'
+          및 '재시도'가 가능합니다
         </p>
         <Last>
           문의: 010-9302-1013 이승환 <br />
