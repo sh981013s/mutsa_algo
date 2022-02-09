@@ -105,7 +105,7 @@ function App() {
               )}
               <Submitted />
             </Route>
-            <Route exact path="/SubmittedDetail/:name/:title">
+            <Route exact path="/SubmittedDetail/:name/:title/:id">
               {!user && <Redirect to="/login" />}
               {!user?.displayName.includes('20') && (
                 <Redirect to="/setdisplayname" />

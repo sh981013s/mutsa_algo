@@ -52,6 +52,7 @@ const Console = () => {
               {
                 title: single.title.stringValue,
                 isCorrect: single.isCorrect.stringValue,
+                id: doc.id,
               },
             ],
             cnt: 0,
@@ -65,12 +66,15 @@ const Console = () => {
               {
                 title: single.title.stringValue,
                 isCorrect: single.isCorrect.stringValue,
+                id: doc.id,
               },
             ],
             cnt: tmp.cnt + 1,
           });
         }
       });
+      console.log(res, 'doc');
+
       setUserList(res);
     });
     return () => unsub();
@@ -91,25 +95,28 @@ const Console = () => {
                 if (title.isCorrect === 'true') {
                   return (
                     <ConsoleLink
-                      to={`/SubmittedDetail/${person.name}/${title.title}`}
+                      key={title.title}
+                      to={`/SubmittedDetail/${person.name}/${title.title}/${title.id}`}
                     >
-                      <p key={title.title}>📄 {title.title} ✅</p>
+                      <p>📄 {title.title} ✅</p>
                     </ConsoleLink>
                   );
                 } else if (title.isCorrect === 'false') {
                   return (
                     <ConsoleLink
-                      to={`/SubmittedDetail/${person.name}/${title.title}`}
+                      key={title.title}
+                      to={`/SubmittedDetail/${person.name}/${title.title}/${title.id}`}
                     >
-                      <p key={title.title}>📄 {title.title} ❌</p>
+                      <p>📄 {title.title} ❌</p>
                     </ConsoleLink>
                   );
                 } else {
                   return (
                     <ConsoleLink
-                      to={`/SubmittedDetail/${person.name}/${title.title}`}
+                      key={title.title}
+                      to={`/SubmittedDetail/${person.name}/${title.title}/${title.id}`}
                     >
-                      <p key={title.title}>📄 {title.title}</p>
+                      <p>📄 {title.title}</p>
                     </ConsoleLink>
                   );
                 }

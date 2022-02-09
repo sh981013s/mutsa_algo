@@ -6,7 +6,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Container = styled.div`
@@ -19,11 +19,10 @@ const Container = styled.div`
 `;
 
 const SubmittedDetail = () => {
-  const { name, title } = useParams();
+  const { name, title, id } = useParams();
   const { user } = useAuthContext();
+  const history = useHistory();
   const [sourceCode, setSourceCode] = useState('');
-
-  console.log(name, title);
 
   useEffect(() => {
     if (user) {
@@ -44,16 +43,36 @@ const SubmittedDetail = () => {
     }
   }, []);
 
-  /*  const wow = doc(db, 'submitted', '4cgfztm6KRTW3OeYObk5');
-  console.log(wow);*/
+  const correct = async () => {
+    const submitted = doc(db, 'submitted', id);
+    await updateDoc(submitted, {
+      isCorrect: 'true',
+    });
+  };
+  const incorrect = async () => {
+    const submitted = doc(db, 'submitted', id);
+    await updateDoc(submitted, {
+      isCorrect: 'false',
+    });
+  };
 
-  const tmp = 'a = 12\nb = 2\n\nconsole.log(12+2)';
+  const correctHandler = async () => {
+    await correct();
+    history.push('/console');
+  };
+
+  const incorrectHandler = async () => {
+    await incorrect();
+    history.push('/console');
+  };
 
   return (
     <Container>
       <SyntaxHighlighter language="javascript" style={docco}>
         {sourceCode}
       </SyntaxHighlighter>
+      <button onClick={correctHandler}>✅ 정답</button>
+      <button onClick={incorrectHandler}>❌ 오답</button>
     </Container>
   );
 };
