@@ -127,7 +127,7 @@ export default function Problems() {
             </TableBody>
           </Table>
         </StyledTable>
-        {isProved(user.email) && (
+        {isProved(user?.email) && (
           <StyledLink to="/newQuestion">
             <NewBtn>문제 등록</NewBtn>
           </StyledLink>
