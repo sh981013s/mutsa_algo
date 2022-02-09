@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useLogin } from '../../hooks/useLogin';
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -11,7 +11,7 @@ const Container = styled.div`
   color: white;
 `;
 
-const Main = styled.div`
+export const Main = styled.div`
   width: 50%;
   height: 50%;
   background: #484640;

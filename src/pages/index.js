@@ -7,3 +7,4 @@ export { default as Login } from './Login/Login';
 export { default as Submitted } from './Submitted/Submitted';
 export { default as SubmittedDetail } from './SubmittedDetail/SubmittedDetail';
 export { default as Console } from './Console/Console';
+export { default as SetDisplayName } from './SetDisplayName/SetDisplayName';
