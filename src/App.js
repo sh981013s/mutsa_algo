@@ -14,6 +14,7 @@ import { Navbar } from 'responsive-navbar-react';
 import 'responsive-navbar-react/dist/index.css';
 import styled from 'styled-components';
 import { useAuthContext } from './hooks/useAuthContext';
+import isProved from './utils/provedEmails';
 
 const Container = styled.div`
   width: 100%;
@@ -64,6 +65,7 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/problems">
+              {/*{!isProved(user?.email) && <Redirect to="/login" />}*/}
               {!user && <Redirect to="/login" />}
               <Problems />
             </Route>

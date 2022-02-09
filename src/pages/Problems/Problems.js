@@ -35,7 +35,7 @@ const StyledTableRow = Styled(TableRow)(({ theme }) => ({
 
 const StyledTable = Styled(TableContainer)(({ theme }) => ({
   '&': {
-    'box-shadow': '6px 5px 15px 1px rgba(255, 217, 84, 0.72)',
+    boxShadow: '6px 5px 15px 1px rgba(255, 217, 84, 0.72)',
   },
 }));
 

@@ -109,6 +109,7 @@ const Solve = ({ match }) => {
       writer: user.displayName,
       title: title,
       sourceCode: code,
+      isCorrect: false,
     });
     history.push('/problems');
   };
