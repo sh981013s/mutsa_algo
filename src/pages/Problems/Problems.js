@@ -33,6 +33,12 @@ const StyledTableRow = Styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const StyledTable = Styled(TableContainer)(({ theme }) => ({
+  '&': {
+    'box-shadow': '6px 5px 15px 1px rgba(255, 217, 84, 0.72)',
+  },
+}));
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -98,7 +104,7 @@ export default function Problems() {
   return (
     <Container>
       <div>
-        <TableContainer sx={{ width: '100%' }} component={Paper}>
+        <StyledTable sx={{ width: '100%' }} component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -118,7 +124,7 @@ export default function Problems() {
                 ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </StyledTable>
         <StyledLink to="/newQuestion">
           <NewBtn>문제 등록</NewBtn>
         </StyledLink>

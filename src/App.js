@@ -36,7 +36,7 @@ function App() {
       },
       {
         text: '제출내역 🙋🏻‍♂️',
-        link: '/Submitted',
+        link: '/submitted',
       },
     ],
     logo: {
@@ -83,9 +83,8 @@ function App() {
               {user && <Redirect to="/" />}
               <Login />
             </Route>
-            <Route exact path="/Submitted">
-              {!user && <Redirect to="/login" />}
-              <Submitted />
+            <Route exact path="/submitted">
+              {!user ? <Redirect to="/login" /> : <Submitted />}
             </Route>
             <Route exact path="/SubmittedDetail">
               {!user && <Redirect to="/login" />}

@@ -42,7 +42,7 @@ const MarkdownRender = ({ body }) => {
       <div className="markdown-render" dangerouslySetInnerHTML={markup} />
       <style jsx>{`
         .markdown-render {
-          width: 100%;
+          width: 93%;
           height: 90%;
           overflow-y: scroll;
           padding: 1rem;

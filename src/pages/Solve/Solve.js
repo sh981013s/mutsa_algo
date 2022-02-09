@@ -33,6 +33,8 @@ const Instruction = styled.div`
   width: 50%;
   height: 84%;
   background: #212325;
+  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
 `;
 
 const BoxHead = styled.div`
@@ -53,11 +55,13 @@ const Editor = styled.div`
 const Solution = styled.div`
   width: 100%;
   height: 80%;
+  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
 `;
 
 const Code = styled(CodeEditor)`
   width: 100%;
-  height: 100%;
+  height: 95%;
 `;
 
 const SubmitContainer = styled.div`
@@ -78,6 +82,7 @@ const SubmitBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:hover {
     cursor: pointer;
   }
@@ -109,16 +114,18 @@ const Solve = ({ match }) => {
   };
 
   useEffect(() => {
-    let ref = collection(db, 'probs');
-    ref = query(ref, where('title', '==', title));
+    if (user) {
+      let ref = collection(db, 'probs');
+      ref = query(ref, where('title', '==', title));
 
-    const unsub = onSnapshot(ref, (snapshot) => {
-      setInstruc(
-        snapshot.docs[0]._document.data.value.mapValue.fields.instruction
-          .stringValue
-      );
-    });
-    return () => unsub();
+      const unsub = onSnapshot(ref, (snapshot) => {
+        setInstruc(
+          snapshot.docs[0]._document.data.value.mapValue.fields.instruction
+            .stringValue
+        );
+      });
+      return () => unsub();
+    }
   }, []);
 
   return (
