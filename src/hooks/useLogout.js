@@ -1,6 +1,6 @@
 import { auth } from '../firebase/firebaseConfig';
 import { signOut } from 'firebase/auth';
-import { useAuthContext } from '../../../mutsa_algo/src/hooks/useAuthContext';
+import { useAuthContext } from './useAuthContext';
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext();

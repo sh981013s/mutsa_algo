@@ -1,6 +1,6 @@
 import { signInWithGoogle } from '../firebase/firebaseConfig';
 import { useState } from 'react';
-import { useAuthContext } from '../../../mutsa_algo/src/hooks/useAuthContext';
+import { useAuthContext } from './useAuthContext';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
