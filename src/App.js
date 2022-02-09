@@ -8,6 +8,7 @@ import {
   Login,
   Submitted,
   SubmittedDetail,
+  Console,
 } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
@@ -91,6 +92,10 @@ function App() {
             <Route exact path="/SubmittedDetail">
               {!user && <Redirect to="/login" />}
               <SubmittedDetail />
+            </Route>
+            <Route exact path="/console">
+              {!isProved(user?.email) && <Redirect to="/" />}
+              <Console />
             </Route>
           </BrowserRouter>
         )}
