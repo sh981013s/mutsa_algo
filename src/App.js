@@ -145,7 +145,7 @@ function App() {
               )}
             </Route>
             <Route exact path="/SubmittedSourceCode/:name/:title/:id">
-              {user ? (
+              {!user ? (
                 <Redirect to="/login" />
               ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
