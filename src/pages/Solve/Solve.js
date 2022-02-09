@@ -1,22 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styled from 'styled-components';
-import MDEditor from '@uiw/react-md-editor';
-
-import marked from 'marked';
-import Prism from 'prismjs';
-
 import MarkDownRenderer from '../../components/NewQuestion/MarkDownRenderer';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  query,
+  where,
+} from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
-
-/*import Markdown from 'marked-react';
-import Lowlight from 'react-lowlight';
-import markdown from 'highlight.js/lib/languages/markdown';*/
-
-// import ReactMarkdown from 'react-markdown';
-
-// import '@/style/prism.css';
+import { useHistory, useParams } from 'react-router-dom';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { Left, Right, TitleContainer } from '../NewQuestion/NewQuestion';
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +30,7 @@ const CodeContainer = styled.div`
 `;
 
 const Instruction = styled.div`
-  width: 30%;
+  width: 50%;
   height: 84%;
   background: #212325;
 `;
@@ -82,44 +78,55 @@ const SubmitBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const MarkDown = styled(MarkDownRenderer)`
   width: 90%;
   height: 90%;
-  padding: 3rem;
+  padding: 5rem;
   overflow-y: scroll;
 `;
 
-const Solve = () => {
+const Solve = ({ match }) => {
+  const { title } = useParams();
+  const { user } = useAuthContext();
+  const history = useHistory();
   const [code, setCode] = useState(
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
+  const [instruc, setInstruc] = useState('');
 
-  useEffect(() => {
-    console.log(code, 'ccc');
-  }, [code]);
-
-  const submitProb = () => {
-    addDoc(collection(db, 'submitted'), {
-      // writer: user.displayName,
-      // title: title,
+  const submitProb = async () => {
+    await addDoc(collection(db, 'submitted'), {
+      writer: user.displayName,
+      title: title,
       sourceCode: code,
     });
+    history.push('/problems');
   };
 
-  const body = `# 안녕\n\n## 안뇽뇽\n\n### 안냥냥\n\n---\n\n- ㅋ\n- ㄴ\n- ㄷ`;
+  useEffect(() => {
+    let ref = collection(db, 'probs');
+    ref = query(ref, where('title', '==', title));
+
+    const unsub = onSnapshot(ref, (snapshot) => {
+      setInstruc(
+        snapshot.docs[0]._document.data.value.mapValue.fields.instruction
+          .stringValue
+      );
+    });
+    return () => unsub();
+  }, []);
 
   return (
     <Container>
       <CodeContainer>
         <Instruction>
           <BoxHead>Instructions</BoxHead>
-          {/*<ReactMarkdown children={tmp} remarkPlugins={[remarkGfm]} />,*/}
-          {/*<MarkDown source={tmp} enableScroll="true" />*/}
-          {/*<div className="markdown-render" dangerouslySetInnerHTML={markup} />*/}
-          {/*<div className="markdown-render" dangerouslySetInnerHTML={markup} />*/}
-          <MarkDown body={body} />
+          <MarkDown body={instruc} />
         </Instruction>
         <Editor>
           <Solution>

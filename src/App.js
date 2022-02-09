@@ -67,7 +67,7 @@ function App() {
               {!user && <Redirect to="/login" />}
               <Problems />
             </Route>
-            <Route exact path="/solve">
+            <Route exact path="/solve/:title">
               {!user && <Redirect to="/login" />}
               <Solve />
             </Route>

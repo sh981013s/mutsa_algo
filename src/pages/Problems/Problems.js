@@ -21,9 +21,6 @@ const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
-  '&:hover': {
-    cursor: 'pointer',
-  },
 }));
 
 const StyledTableRow = Styled(TableRow)(({ theme }) => ({
@@ -64,22 +61,15 @@ export const NewBtn = styled.button`
   background: rgba(0, 0, 0, 0.49);
   color: white;
   border-radius: 2rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
-function createData(num, name) {
-  return { num, name };
-}
-
-const rows = [
-  createData(1, '별찍기'),
-  createData(2, '별찍기'),
-  createData(3, '별찍기'),
-  createData(4, '별찍기'),
-];
+const TableLink = styled(StyledLink)`
+  color: black;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
 
 export default function Problems() {
   const [problems, setProblems] = useState([]);
@@ -120,7 +110,9 @@ export default function Problems() {
                 problems.map((single) => (
                   <StyledTableRow key={single.title}>
                     <StyledTableCell align="center">
-                      {single.title}
+                      <TableLink to={`/solve/${single.title}`}>
+                        {single.title}
+                      </TableLink>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

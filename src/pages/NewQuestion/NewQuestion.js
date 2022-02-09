@@ -19,19 +19,19 @@ const Panel = styled.div`
   position: relative;
 `;
 
-const Left = styled(Panel)`
+export const Left = styled(Panel)`
   width: 50%;
   background-color: rgb(38, 50, 56);
   flex-direction: column;
   min-height: 100vh;
 `;
 
-const Right = styled(Panel)`
+export const Right = styled(Panel)`
   width: 50%;
   background-color: #fff;
 `;
 
-const TitleContainer = styled.div`
+export const TitleContainer = styled.div`
   position: relative;
   z-index: 15;
   height: 4rem;
