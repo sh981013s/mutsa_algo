@@ -11,6 +11,7 @@ import {
   Console,
   SetDisplayName,
   SubmittedSourceCode,
+  Tmp,
 } from './pages/index';
 import GlobalStyle from './GlobalStyle';
 import { Navbar } from 'responsive-navbar-react';
@@ -166,6 +167,9 @@ function App() {
             </Route>
             <Route exact path="/setdisplayname">
               {!user ? <Redirect to="/login" /> : <SetDisplayName />}
+            </Route>
+            <Route exact path="/tmp">
+              <Tmp />
             </Route>
           </Switch>
         )}

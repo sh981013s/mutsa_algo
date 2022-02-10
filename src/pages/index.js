@@ -9,3 +9,4 @@ export { default as SubmittedDetail } from './SubmittedDetail/SubmittedDetail';
 export { default as Console } from './Console/Console';
 export { default as SetDisplayName } from './SetDisplayName/SetDisplayName';
 export { default as SubmittedSourceCode } from './SubmittedSourceCode/SubmittedSourceCode';
+export { default as Tmp } from './Tmp/Tmp';

@@ -58,7 +58,7 @@ const Solution = styled.div`
   box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
 `;
 
-const Code = styled(CodeEditor)`
+export const Code = styled(CodeEditor)`
   width: 100%;
   height: 95%;
 `;
@@ -124,27 +124,6 @@ const Solve = ({ match }) => {
           snapshot.docs[0]._document.data.value.mapValue.fields.instruction
             .stringValue
         );
-      });
-      return () => unsub();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      let ref = collection(db, 'submitted');
-      ref = query(
-        ref,
-        where('title', '==', title),
-        where('writer', '==', user.displayName)
-      );
-
-      const unsub = onSnapshot(ref, (snapshot) => {
-        if (
-          snapshot.docs[0]._document.data.value.mapValue.fields.sourceCode
-            .stringValue
-        ) {
-          setAlreadySolved(true);
-        }
       });
       return () => unsub();
     }

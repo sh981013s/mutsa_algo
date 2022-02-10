@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/firebaseConfig';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import isProved from '../../utils/provedEmails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -48,6 +48,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   text-align: end;
+  div {
+    p {
+      color: white;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -85,12 +93,13 @@ export const TableLink = styled(StyledLink)`
 export default function Problems() {
   const { user } = useAuthContext();
   const [problems, setProblems] = useState([]);
+  const [solvedProbs, setSolvedProbs] = useState([]);
 
+  // 전체문제 가져오기
   useEffect(() => {
     const tmp = [];
     let ref = collection(db, 'probs');
     ref = query(ref);
-
     const unsub = onSnapshot(ref, (snapshot) => {
       // eslint-disable-next-line array-callback-return
       snapshot.docs.map((doc) => {
@@ -106,9 +115,29 @@ export default function Problems() {
     return () => unsub();
   }, []);
 
+  // 유저가 푼 문제들
+  useEffect(() => {
+    if (user) {
+      let ref = collection(db, 'submitted');
+      ref = query(ref, where('writer', '==', user.displayName));
+      const unsub = onSnapshot(ref, (snapshot) => {
+        console.log(snapshot.docs, 'snap');
+        const solvedArr = [];
+        snapshot.docs.map((single) => {
+          solvedArr.push(
+            single._document.data.value.mapValue.fields.title.stringValue
+          );
+        });
+        setSolvedProbs(solvedArr);
+      });
+      return () => unsub();
+    }
+  }, []);
+
   return (
     <Container>
       <div>
+        <p>✅ = '제출완료됨'</p>
         <StyledTable sx={{ width: '100%' }} component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -118,15 +147,30 @@ export default function Problems() {
             </TableHead>
             <TableBody>
               {problems.length > 0 &&
-                problems.map((single) => (
-                  <StyledTableRow key={single.title}>
-                    <StyledTableCell align="center">
-                      <TableLink to={`/solve/${single.title}`}>
-                        {single.title}
-                      </TableLink>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                problems.map((single) => {
+                  console.log(single.title, 'ss');
+                  if (solvedProbs.includes(single.title)) {
+                    return (
+                      <StyledTableRow key={single.title}>
+                        <StyledTableCell align="center">
+                          <TableLink to={`/solve/${single.title}`}>
+                            {single.title} ✅
+                          </TableLink>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  } else {
+                    return (
+                      <StyledTableRow key={single.title}>
+                        <StyledTableCell align="center">
+                          <TableLink to={`/solve/${single.title}`}>
+                            {single.title}
+                          </TableLink>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  }
+                })}
             </TableBody>
           </Table>
         </StyledTable>
