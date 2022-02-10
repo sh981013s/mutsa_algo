@@ -82,7 +82,6 @@ const Submitted = () => {
             title: [
               {
                 title: single.title.stringValue,
-                isCorrect: single.isCorrect.stringValue,
                 id: doc.id,
               },
             ],
@@ -95,7 +94,6 @@ const Submitted = () => {
               ...tmp.title,
               {
                 title: single.title.stringValue,
-                isCorrect: single.isCorrect.stringValue,
                 id: doc.id,
               },
             ],

@@ -121,12 +121,13 @@ export default function Problems() {
       let ref = collection(db, 'submitted');
       ref = query(ref, where('writer', '==', user.displayName));
       const unsub = onSnapshot(ref, (snapshot) => {
-        console.log(snapshot.docs, 'snap');
         const solvedArr = [];
         snapshot.docs.map((single) => {
-          solvedArr.push(
-            single._document.data.value.mapValue.fields.title.stringValue
-          );
+          const singleTmpObj = {};
+          singleTmpObj.title =
+            single._document.data.value.mapValue.fields.title.stringValue;
+          singleTmpObj.id = single.id;
+          solvedArr.push(singleTmpObj);
         });
         setSolvedProbs(solvedArr);
       });
@@ -137,7 +138,7 @@ export default function Problems() {
   return (
     <Container>
       <div>
-        <p>✅ = '제출완료됨'</p>
+        <p>✅ = '통과'</p>
         <StyledTable sx={{ width: '100%' }} component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -148,12 +149,19 @@ export default function Problems() {
             <TableBody>
               {problems.length > 0 &&
                 problems.map((single) => {
-                  console.log(single.title, 'ss');
-                  if (solvedProbs.includes(single.title)) {
+                  if (
+                    solvedProbs.filter((e) => e.title === single.title).length >
+                    0
+                  ) {
+                    const tmp = solvedProbs.filter(
+                      (e) => e.title === single.title
+                    );
                     return (
                       <StyledTableRow key={single.title}>
                         <StyledTableCell align="center">
-                          <TableLink to={`/solve/${single.title}`}>
+                          <TableLink
+                            to={`/SubmittedSourceCode/${user.displayName}/${single.title}/${tmp.id}`}
+                          >
                             {single.title} ✅
                           </TableLink>
                         </StyledTableCell>

@@ -80,7 +80,7 @@ const SubmittedSourceCode = () => {
       <div>
         <h1>📄 문제명: {title}</h1>
         <h2>🙋🏻‍♀️ 제출자: {user.displayName}</h2>
-        <h2>🧮 제출코드</h2>
+        <h2>🧮 내가 제출한 코드</h2>
         <hr />
         <SyntaxHighlighter language="python" style={a11yDark}>
           {sourceCode}
