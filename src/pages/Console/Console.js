@@ -52,11 +52,9 @@ const Console = () => {
             title: [
               {
                 title: single.title.stringValue,
-                isCorrect: single.isCorrect.stringValue,
                 id: doc.id,
               },
             ],
-            cnt: single.isCorrect.stringValue === 'true' ? 1 : 0,
           });
         } else {
           res = res.filter((fil) => fil.name !== tmp.name);
@@ -66,12 +64,9 @@ const Console = () => {
               ...tmp.title,
               {
                 title: single.title.stringValue,
-                isCorrect: single.isCorrect.stringValue,
                 id: doc.id,
               },
             ],
-            cnt:
-              single.isCorrect.stringValue === 'true' ? tmp.cnt + 1 : tmp.cnt,
           });
         }
       });
@@ -89,38 +84,16 @@ const Console = () => {
           return (
             <FlexCell key={person.name}>
               <h2>👩‍🌾 {person.name} 👩‍🌾</h2>
-              <h4>
-                {person.cnt} / {total} (정답 / 총합)
-              </h4>
+              <h4>{total} (정답 갯수)</h4>
               {person.title.map((title) => {
-                if (title.isCorrect === 'true') {
-                  return (
-                    <ConsoleLink
-                      key={title.title}
-                      to={`/SubmittedDetail/${person.name}/${title.title}/${title.id}`}
-                    >
-                      <p>📄 {title.title} ✅</p>
-                    </ConsoleLink>
-                  );
-                } else if (title.isCorrect === 'false') {
-                  return (
-                    <ConsoleLink
-                      key={title.title}
-                      to={`/SubmittedDetail/${person.name}/${title.title}/${title.id}`}
-                    >
-                      <p>📄 {title.title} ❌</p>
-                    </ConsoleLink>
-                  );
-                } else {
-                  return (
-                    <ConsoleLink
-                      key={title.title}
-                      to={`/SubmittedDetail/${person.name}/${title.title}/${title.id}`}
-                    >
-                      <p>📄 {title.title}</p>
-                    </ConsoleLink>
-                  );
-                }
+                return (
+                  <ConsoleLink
+                    key={title.title}
+                    to={`/SubmittedSourceCode/${person.name}/${title.title}/${title.id}`}
+                  >
+                    <p>📄 {title.title} ✅</p>
+                  </ConsoleLink>
+                );
               })}
             </FlexCell>
           );
