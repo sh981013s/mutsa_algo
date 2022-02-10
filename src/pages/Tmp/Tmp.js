@@ -27,7 +27,6 @@ const InputDiv = styled.div`
 `;
 
 const Tmp = () => {
-  const API_KEY = '0bd064af3bmsh12f18bdaa5ed031p171885jsn3e33c322cb9d';
   const [code, setCode] = useState(
     `print('안녕하세요! 멋사에 지원해주셔서 감사드립니다.')`
   );
@@ -87,7 +86,7 @@ const Tmp = () => {
         method: 'POST',
         headers: {
           'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key': API_KEY,
+          'x-rapidapi-key': process.env.REACT_APP_JUDGE_KEY,
           'content-type': 'application/json',
           accept: 'application/json',
         },
@@ -136,7 +135,7 @@ const Tmp = () => {
         method: 'GET',
         headers: {
           'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key': API_KEY,
+          'x-rapidapi-key': process.env.REACT_APP_JUDGE_KEY,
           'content-type': 'application/json',
         },
       });
