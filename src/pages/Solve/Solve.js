@@ -70,6 +70,9 @@ const SubmitContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  p {
+    font-size: 2rem;
+  }
 `;
 
 const SubmitBtn = styled.div`
@@ -104,13 +107,15 @@ const Solve = ({ match }) => {
   );
   const [instruc, setInstruc] = useState('');
   const [testValues, setTestValues] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const submitProb = async () => {
+  const success = async () => {
     await addDoc(collection(db, 'submitted'), {
       writer: user.displayName,
       title: title,
       sourceCode: code,
     });
+    alert('🦁 정답입니다!!!!!!!!');
     history.push('/problems');
   };
 
@@ -153,6 +158,24 @@ const Solve = ({ match }) => {
   }, []);
 
   const testHandler = async () => {
+    setIsLoading(true);
+    const firstTestRes = await getResOfTest(
+      testValues['test1Input'],
+      testValues['test1Output']
+    );
+    const secondTestRes = await getResOfTest(
+      testValues['test2Input'],
+      testValues['test2Output']
+    );
+    if (firstTestRes && secondTestRes) {
+      await success();
+    } else {
+      alert('😭 오답입니다!');
+    }
+    setIsLoading(false);
+  };
+
+  const getResOfTest = async (input, output) => {
     const response = await fetch(
       'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true',
       {
@@ -166,14 +189,13 @@ const Solve = ({ match }) => {
         body: JSON.stringify({
           language_id: 71,
           source_code: encode(code),
-          stdin: encode(testValues['test1Input']),
+          stdin: encode(input),
           redirect_stderr_to_stdout: true,
-          expected_output: encode(testValues['test1Output']),
+          expected_output: encode(output),
         }),
       }
     );
     const responseJson = await response.json();
-    console.log(responseJson, 'res');
     if (responseJson.token) {
       let url = `https://judge0-ce.p.rapidapi.com/submissions/${responseJson.token}?base64_encoded=true`;
       const getSolution = await fetch(url, {
@@ -185,7 +207,9 @@ const Solve = ({ match }) => {
         },
       });
       const final = await getSolution.json();
-      console.log(final);
+      if (final) {
+        return final.status.description === 'Accepted';
+      }
     }
   };
 
@@ -213,7 +237,9 @@ const Solve = ({ match }) => {
               }}
             />
           </Solution>
+
           <SubmitContainer>
+            {isLoading && <p>🤖 코드 테스트중 . . .</p>}
             <SubmitBtn onClick={testHandler}>코드 테스트</SubmitBtn>
           </SubmitContainer>
         </Editor>
