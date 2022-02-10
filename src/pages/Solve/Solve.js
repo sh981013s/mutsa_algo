@@ -132,7 +132,11 @@ const Solve = ({ match }) => {
   useEffect(() => {
     if (user) {
       let ref = collection(db, 'submitted');
-      ref = query(ref, where('title', '==', title));
+      ref = query(
+        ref,
+        where('title', '==', title),
+        where('writer', '==', user.displayName)
+      );
 
       const unsub = onSnapshot(ref, (snapshot) => {
         if (
