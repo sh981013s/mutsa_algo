@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Code } from '../Solve/Solve';
 import { useEffect, useState } from 'react';
+import { encode } from '../../utils/codeTranslator';
 
 const Container = styled.div`
   width: 100%;
@@ -34,43 +35,6 @@ const Tmp = () => {
   const [output, setOutput] = useState('');
   const [res, setRes] = useState('');
 
-  function errorHandler(jqXHR, textStatus, errorThrown) {
-    setRes(`${JSON.stringify(jqXHR, null, 4)}`);
-  }
-
-  /*  function check(token) {
-    setRes('⏬ Checking submission status...');
-    $.ajax({
-      url: `https://judge0-ce.p.rapidapi.com/submissions/${token}?base64_encoded=true`,
-      type: 'GET',
-      headers: {
-        'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-        'x-rapidapi-key': API_KEY,
-      },
-      success: function (data, textStatus, jqXHR) {
-        if ([1, 2].includes(data['status']['id'])) {
-          $('#output').val(
-            $('#output').val() + '\nℹ️ Status: ' + data['status']['description']
-          );
-          setTimeout(function () {
-            check(token);
-          }, 1000);
-        } else {
-          var output = [decode(data['compile_output']), decode(data['stdout'])]
-            .join('\n')
-            .trim();
-          $('#output').val(
-            `${data['status']['id'] != '3' ? '🔴' : '🟢'} ${
-              data['status']['description']
-            }\n${output}`
-          );
-          $('#run').prop('disabled', false);
-        }
-      },
-      error: errorHandler,
-    });
-  }*/
-
   const submitHandler = async () => {
     const response = await fetch(
       'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true',
@@ -78,7 +42,8 @@ const Tmp = () => {
         method: 'POST',
         headers: {
           'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key': process.env.REACT_APP_JUDGE_KEY,
+          'x-rapidapi-key':
+            '0bd064af3bmsh12f18bdaa5ed031p171885jsn3e33c322cb9d',
           'content-type': 'application/json',
           accept: 'application/json',
         },
@@ -86,7 +51,7 @@ const Tmp = () => {
           language_id: 71,
           source_code: encode(code),
           stdin: encode(input),
-          redirect_stderr_to_stdout: true,
+          // redirect_stderr_to_stdout: true,
           expected_output: encode(output),
         }),
       }
@@ -99,7 +64,8 @@ const Tmp = () => {
         method: 'GET',
         headers: {
           'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key': process.env.REACT_APP_JUDGE_KEY,
+          'x-rapidapi-key':
+            '0bd064af3bmsh12f18bdaa5ed031p171885jsn3e33c322cb9d',
           'content-type': 'application/json',
         },
       });
