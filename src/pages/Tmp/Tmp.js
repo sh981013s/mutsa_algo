@@ -34,14 +34,6 @@ const Tmp = () => {
   const [output, setOutput] = useState('');
   const [res, setRes] = useState('');
 
-  const encode = (str) => {
-    return btoa(unescape(encodeURIComponent(str || '')));
-  };
-
-  const decode = (str) => {
-    return atob(str);
-  };
-
   function errorHandler(jqXHR, textStatus, errorThrown) {
     setRes(`${JSON.stringify(jqXHR, null, 4)}`);
   }
@@ -95,38 +87,10 @@ const Tmp = () => {
           source_code: encode(code),
           stdin: encode(input),
           redirect_stderr_to_stdout: true,
-          // expected_output: encode(output),
+          expected_output: encode(output),
         }),
       }
     );
-    /*    const response = await fetch(
-      'https://ce.judge0.com/submissions/batch?base64_encoded=true',
-      {
-        method: 'POST',
-        headers: {
-          'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key': API_KEY,
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-        body: JSON.stringify({
-          submissions: [
-            {
-              language_id: 46,
-              source_code: 'echo hello from Bash',
-            },
-            {
-              language_id: 71,
-              source_code: 'print("hello from Python")',
-            },
-            {
-              language_id: 72,
-              source_code: 'puts("hello from Ruby")',
-            },
-          ],
-        }),
-      }
-    );*/
     const responseJson = await response.json();
     console.log(responseJson);
     if (responseJson.token) {
@@ -141,19 +105,6 @@ const Tmp = () => {
       });
       const final = await getSolution.json();
       console.log(final);
-      /*    if (responseJson.token) {
-      let url = `https://judge0-ce.p.rapidapi.com/submissions/batch${responseJson.token}?base64_encoded=true`;
-      const getSolution = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key': API_KEY,
-          'content-type': 'application/json',
-        },
-      });
-      const final = await getSolution.json();
-      console.log(final);
-    }*/
     }
   };
 
