@@ -42,8 +42,7 @@ const Tmp = () => {
         method: 'POST',
         headers: {
           'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key':
-            '0bd064af3bmsh12f18bdaa5ed031p171885jsn3e33c322cb9d',
+          'x-rapidapi-key': process.env.REACT_APP_JUDGE_KEY,
           'content-type': 'application/json',
           accept: 'application/json',
         },
@@ -64,8 +63,7 @@ const Tmp = () => {
         method: 'GET',
         headers: {
           'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-          'x-rapidapi-key':
-            '0bd064af3bmsh12f18bdaa5ed031p171885jsn3e33c322cb9d',
+          'x-rapidapi-key': process.env.REACT_APP_JUDGE_KEY,
           'content-type': 'application/json',
         },
       });
