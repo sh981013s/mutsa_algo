@@ -108,6 +108,7 @@ export default function Problems() {
           title: single.title.stringValue,
           writer: single.writer.stringValue,
           instruction: single.instruction.stringValue,
+          id: doc.id,
         });
       });
       setProblems(tmp);
@@ -160,7 +161,7 @@ export default function Problems() {
                       <StyledTableRow key={single.title}>
                         <StyledTableCell align="center">
                           <TableLink
-                            to={`/SubmittedSourceCode/${user.displayName}/${single.title}/${tmp.id}`}
+                            to={`/SubmittedSourceCode/${user.displayName}/${single.title}/${tmp[0].id}`}
                           >
                             {single.title} ✅
                           </TableLink>
