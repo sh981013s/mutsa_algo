@@ -26,8 +26,8 @@ const Card = styled(motion.div)`
   background: #31302c;
   color: white;
   border-radius: 3rem;
-  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
-  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  -webkit-box-shadow: 6px 5px 15px 1px #898989;
+  box-shadow: 6px 5px 15px 1px #898989;
 `;
 
 const Title = styled.h1`

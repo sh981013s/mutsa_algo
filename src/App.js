@@ -24,6 +24,7 @@ const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   background: #2a2b2d;
+  overflow-y: hidden;
 `;
 
 const props = {

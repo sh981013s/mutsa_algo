@@ -22,8 +22,8 @@ export const Main = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
-  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  -webkit-box-shadow: 6px 5px 15px 1px #898989;
+  box-shadow: 6px 5px 15px 1px #898989;
 
   h1 {
     font-style: italic;

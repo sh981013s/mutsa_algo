@@ -35,8 +35,8 @@ const Instruction = styled(motion.div)`
   width: 50%;
   height: 84%;
   background: #212325;
-  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
-  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  -webkit-box-shadow: 6px 5px 15px 1px #898989;
+  box-shadow: 6px 5px 15px 1px #898989;
 `;
 
 const BoxHead = styled.div`
@@ -57,8 +57,8 @@ const Editor = styled.div`
 const Solution = styled(motion.div)`
   width: 100%;
   height: 80%;
-  -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
-  box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
+  -webkit-box-shadow: 6px 5px 15px 1px #898989;
+  box-shadow: 6px 5px 15px 1px #898989;
 `;
 
 export const Code = styled(CodeEditor)`
@@ -68,7 +68,7 @@ export const Code = styled(CodeEditor)`
 
 const SubmitContainer = styled.div`
   width: 100%;
-  height: 20%;
+  height: 12%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,15 +78,17 @@ const SubmitContainer = styled.div`
 `;
 
 const SubmitBtn = styled(motion.div)`
-  width: 5rem;
-  height: 2rem;
-  background: #5d88d6;
-  margin-top: 3rem;
+  width: 13rem;
+  height: 3rem;
+  background: #898989;
   color: black;
+  font-weight: 700;
   border-radius: 0.4rem;
-  display: flex;
+  display: ${(props) => (props.isLoading ? 'none' : 'inline-flex')};
   justify-content: center;
   align-items: center;
+  -webkit-box-shadow: 6px 5px 15px 1px #898989;
+  box-shadow: 6px 5px 15px 1px #1f1818;
 
   &:hover {
     cursor: pointer;
@@ -289,8 +291,9 @@ const Solve = ({ match }) => {
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              isLoading={isLoading}
             >
-              코드 테스트
+              소스코드 제출
             </SubmitBtn>
           </SubmitContainer>
         </Editor>

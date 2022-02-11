@@ -47,6 +47,17 @@ const MarkdownRender = ({ body }) => {
           overflow-y: scroll;
           padding: 1rem;
         }
+
+        .markdown-render::-webkit-scrollbar {
+          -webkit-appearance: none;
+          width: 7px;
+        }
+
+        .markdown-render::-webkit-scrollbar-thumb {
+          border-radius: 4px;
+          background-color: #898989;
+          box-shadow: #000;
+        }
       `}</style>
     </>
   );
