@@ -7,6 +7,7 @@ import { db } from '../../firebase/firebaseConfig';
 import MarkdownEditor from '../../components/NewQuestion/MarkdownEditor';
 import MarkdownPreview from '../../components/NewQuestion/MarkdownPreview';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   width: 100%;
@@ -140,7 +141,13 @@ const NewQuestion = () => {
         <TitleContainer>
           <input type="text" placeholder={title} onChange={handleTitleChange} />
           <StyledLink to="/newQuestion">
-            <NewBtn onClick={submitProb}>문제 등록</NewBtn>
+            <NewBtn
+              onClick={submitProb}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              문제 등록
+            </NewBtn>
           </StyledLink>
         </TitleContainer>
         <MdEditor body={value} edit={setValue} />
@@ -148,72 +155,88 @@ const NewQuestion = () => {
           <div>
             <div>
               <span>📄Input 1 :</span>
-              <input
+              <motion.input
                 onChange={(e) => setTestInputOne(e.target.value)}
                 type="text"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
             <div>
               <span>🔢 number :</span>
-              <input
+              <motion.input
                 type="checkbox"
                 onChange={() => {
                   setTestInputOneCheck(!testInputOneCheck);
                 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
           </div>
           <div>
             <div>
               <span>✅Output 1 :</span>
-              <input
+              <motion.input
                 onChange={(e) => setTestOutputOne(e.target.value)}
                 type="text"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
             <div>
               <span>🔢 number :</span>
-              <input
+              <motion.input
                 type="checkbox"
                 onChange={() => {
                   setTestOutputOneCheck(!testOutputOneCheck);
                 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
           </div>
           <div>
             <div>
               <span>📄Input 2 :</span>
-              <input
+              <motion.input
                 onChange={(e) => setTestInputTwo(e.target.value)}
                 type="text"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
             <div>
               <span>🔢 number :</span>
-              <input
+              <motion.input
                 type="checkbox"
                 onChange={() => {
                   setTestInputTwoCheck(!testInputTwoCheck);
                 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
           </div>
           <div>
             <div>
               <span>✅Output 2 :</span>
-              <input
+              <motion.input
                 onChange={(e) => setTestOutputTwo(e.target.value)}
                 type="text"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
             <div>
               <span>🔢 number :</span>
-              <input
+              <motion.input
                 type="checkbox"
                 onChange={() => {
                   setTestOutputTwoCheck(!testOutputTwoCheck);
                 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               />
             </div>
           </div>
