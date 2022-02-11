@@ -4,8 +4,9 @@ import { db } from '../../firebase/firebaseConfig';
 import { find } from 'lodash';
 import styled from 'styled-components';
 import { TableLink } from '../Problems/Problems';
+import { motion } from 'framer-motion';
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 98vw;
   min-height: 100vh;
   color: white;
@@ -77,7 +78,16 @@ const Console = () => {
   }, []);
 
   return (
-    <Container>
+    <Container
+      initial={{
+        x: -3000,
+        transition: { type: 'spring', duration: 1.5, delay: 1 },
+      }}
+      animate={{
+        x: 0,
+        transition: { type: 'spring', duration: 1.5, delay: 1 },
+      }}
+    >
       {userList.length > 0 &&
         userList.map((person) => {
           const total = person.title.length;
@@ -91,7 +101,12 @@ const Console = () => {
                     key={title.title}
                     to={`/SubmittedSourceCode/${person.name}/${title.title}/${title.id}`}
                   >
-                    <p>📄 {title.title} ✅</p>
+                    <motion.p
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      📄 {title.title} ✅
+                    </motion.p>
                   </ConsoleLink>
                 );
               })}
