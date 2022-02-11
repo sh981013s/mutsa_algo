@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useLogin } from '../../hooks/useLogin';
+import { motion } from 'framer-motion';
 
 export const Container = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ export const Container = styled.div`
   color: white;
 `;
 
-export const Main = styled.div`
+export const Main = styled(motion.div)`
   width: 50%;
   height: 50%;
   background: #484640;
@@ -55,12 +56,25 @@ const Login = () => {
 
   return (
     <Container>
-      <Main>
+      <Main
+        initial={{
+          x: -1500,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+      >
         <h1>Login</h1>
-        <div onClick={login}>
+        <motion.div
+          onClick={login}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
           Login via Google
           <Icon />
-        </div>
+        </motion.div>
       </Main>
     </Container>
   );
