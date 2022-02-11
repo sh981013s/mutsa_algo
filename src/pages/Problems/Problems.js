@@ -50,11 +50,16 @@ const Container = styled.div`
   align-items: center;
   text-align: end;
   div {
-    p {
-      color: white;
-      text-align: center;
+    color: white;
+    h1 {
       font-size: 2rem;
       margin-bottom: 2rem;
+      text-align: center;
+    }
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      text-align: end;
     }
   }
 `;
@@ -149,6 +154,7 @@ export default function Problems() {
           transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
       >
+        <h1>📄 전체 문제</h1>
         <p>✅ = '통과'</p>
         <StyledTable sx={{ width: '100%' }} component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
