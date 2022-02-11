@@ -14,6 +14,7 @@ import { db } from '../../firebase/firebaseConfig';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import isProved from '../../utils/provedEmails';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { motion } from 'framer-motion';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -70,7 +71,7 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-export const NewBtn = styled.button`
+export const NewBtn = styled(motion.button)`
   width: 8rem;
   height: 2.3rem;
   margin-top: 1rem;
@@ -138,7 +139,16 @@ export default function Problems() {
 
   return (
     <Container>
-      <div>
+      <motion.div
+        initial={{
+          x: -1500,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+      >
         <p>✅ = '통과'</p>
         <StyledTable sx={{ width: '100%' }} component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -163,7 +173,7 @@ export default function Problems() {
                           <TableLink
                             to={`/SubmittedSourceCode/${user.displayName}/${single.title}/${tmp[0].id}`}
                           >
-                            {single.title} ✅
+                            <span>{single.title} ✅</span>
                           </TableLink>
                         </StyledTableCell>
                       </StyledTableRow>
@@ -185,10 +195,12 @@ export default function Problems() {
         </StyledTable>
         {isProved(user?.email) && (
           <StyledLink to="/newQuestion">
-            <NewBtn>문제 등록</NewBtn>
+            <NewBtn whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              문제 등록
+            </NewBtn>
           </StyledLink>
         )}
-      </div>
+      </motion.div>
     </Container>
   );
 }

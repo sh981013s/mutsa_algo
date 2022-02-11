@@ -47,7 +47,7 @@ const Home = () => {
     <Container>
       <motion.div
         initial={{
-          x: -500,
+          x: -800,
           transition: { type: 'spring', duration: 1.5, delay: 1 },
         }}
         animate={{
