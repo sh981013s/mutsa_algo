@@ -60,10 +60,12 @@ const SetDisplayName = () => {
         <h1>🦁 이름 설정</h1>
         <p>'학번', '_'(언더스코어), '이름' 순으로</p>
         <p>꼭 '20170109_이승환' 과 같이 닉네임을 설정해주세요.</p>
-        <input
+        <motion.input
           type="text"
           placeholder="20170109_이승환"
           onChange={(e) => setNickName(e.target.value)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         />
         <motion.button
           onClick={displaySubmit}
