@@ -13,6 +13,7 @@ import { db } from '../../firebase/firebaseConfig';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { encode } from '../../utils/codeTranslator';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   width: 100%;
@@ -29,7 +30,7 @@ const CodeContainer = styled.div`
   display: flex;
 `;
 
-const Instruction = styled.div`
+const Instruction = styled(motion.div)`
   width: 50%;
   height: 84%;
   background: #212325;
@@ -52,7 +53,7 @@ const Editor = styled.div`
   height: 100%;
 `;
 
-const Solution = styled.div`
+const Solution = styled(motion.div)`
   width: 100%;
   height: 80%;
   -webkit-box-shadow: 6px 5px 15px 1px rgba(255, 217, 84, 0.72);
@@ -75,7 +76,7 @@ const SubmitContainer = styled.div`
   }
 `;
 
-const SubmitBtn = styled.div`
+const SubmitBtn = styled(motion.div)`
   width: 5rem;
   height: 2rem;
   background: #5d88d6;
@@ -110,7 +111,6 @@ const Solve = ({ match }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isTesting, setIsTesting] = useState(false);
   const [testText, setTestText] = useState('');
-  // console.log(instruc);
 
   const success = async () => {
     await addDoc(collection(db, 'submitted'), {
@@ -226,7 +226,16 @@ const Solve = ({ match }) => {
   return (
     <Container>
       <CodeContainer>
-        <Instruction>
+        <Instruction
+          initial={{
+            x: -1500,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+          animate={{
+            x: 0,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+        >
           <BoxHead>Instructions</BoxHead>
           {isLoading ? (
             <MarkDown body={testText} />
@@ -235,7 +244,16 @@ const Solve = ({ match }) => {
           )}
         </Instruction>
         <Editor>
-          <Solution>
+          <Solution
+            initial={{
+              x: +1500,
+              transition: { type: 'spring', duration: 1.5, delay: 1 },
+            }}
+            animate={{
+              x: 0,
+              transition: { type: 'spring', duration: 1.5, delay: 1 },
+            }}
+          >
             <BoxHead>Solution</BoxHead>
             <Code
               value={code}
@@ -254,7 +272,21 @@ const Solve = ({ match }) => {
 
           <SubmitContainer>
             {isLoading && <p>🤖 코드 테스트중 . . .</p>}
-            <SubmitBtn onClick={testHandler}>코드 테스트</SubmitBtn>
+            <SubmitBtn
+              onClick={testHandler}
+              initial={{
+                y: 1500,
+                transition: { type: 'spring', duration: 1.5, delay: 1 },
+              }}
+              animate={{
+                y: 0,
+                transition: { type: 'spring', duration: 1.5, delay: 1 },
+              }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              코드 테스트
+            </SubmitBtn>
           </SubmitContainer>
         </Editor>
       </CodeContainer>
