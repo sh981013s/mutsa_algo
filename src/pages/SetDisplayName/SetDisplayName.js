@@ -49,12 +49,12 @@ const SetDisplayName = () => {
     <Container>
       <DisMain
         initial={{
-          x: -1500,
-          transition: { type: 'spring', duration: 1.5, delay: 1 },
+          x: -5000,
+          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
         animate={{
           x: 0,
-          transition: { type: 'spring', duration: 1.5, delay: 1 },
+          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
       >
         <h1>🦁 이름 설정</h1>

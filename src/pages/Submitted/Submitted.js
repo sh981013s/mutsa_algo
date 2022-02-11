@@ -117,11 +117,11 @@ const Submitted = () => {
       <Card
         initial={{
           y: 1500,
-          transition: { type: 'spring', duration: 1.5, delay: 1 },
+          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
         animate={{
           y: 0,
-          transition: { type: 'spring', duration: 1.5, delay: 1 },
+          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
       >
         <div>

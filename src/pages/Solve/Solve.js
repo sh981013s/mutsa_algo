@@ -233,12 +233,12 @@ const Solve = ({ match }) => {
       <CodeContainer>
         <Instruction
           initial={{
-            x: -1500,
-            transition: { type: 'spring', duration: 1.5, delay: 1 },
+            x: -5000,
+            transition: { type: 'spring', duration: 0.6, delay: 0.1 },
           }}
           animate={{
             x: 0,
-            transition: { type: 'spring', duration: 1.5, delay: 1 },
+            transition: { type: 'spring', duration: 0.6, delay: 0.1 },
           }}
         >
           <BoxHead>Instructions</BoxHead>
@@ -252,11 +252,11 @@ const Solve = ({ match }) => {
           <Solution
             initial={{
               x: +1500,
-              transition: { type: 'spring', duration: 1.5, delay: 1 },
+              transition: { type: 'spring', duration: 0.6, delay: 0.1 },
             }}
             animate={{
               x: 0,
-              transition: { type: 'spring', duration: 1.5, delay: 1 },
+              transition: { type: 'spring', duration: 0.6, delay: 0.1 },
             }}
           >
             <BoxHead>Solution</BoxHead>
@@ -281,11 +281,11 @@ const Solve = ({ match }) => {
               onClick={testHandler}
               initial={{
                 y: 1500,
-                transition: { type: 'spring', duration: 1.5, delay: 1 },
+                transition: { type: 'spring', duration: 0.6, delay: 0.1 },
               }}
               animate={{
                 y: 0,
-                transition: { type: 'spring', duration: 1.5, delay: 1 },
+                transition: { type: 'spring', duration: 0.6, delay: 0.1 },
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

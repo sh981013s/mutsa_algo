@@ -81,11 +81,11 @@ const SubmittedSourceCode = () => {
       <motion.div
         initial={{
           y: 1500,
-          transition: { type: 'spring', duration: 1.5, delay: 1 },
+          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
         animate={{
           y: 0,
-          transition: { type: 'spring', duration: 1.5, delay: 1 },
+          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
         }}
       >
         <h1>📄 문제명: {title}</h1>
