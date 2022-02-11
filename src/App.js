@@ -43,10 +43,11 @@ const props = {
   ],
   logo: {
     text: '🦁 멋쟁이 사자처럼 at 국민대 사전과제',
+    link: '/',
   },
   style: {
     barStyles: {
-      background: '#212325',
+      background: '#2a2b2d',
     },
     sidebarStyles: {
       background: '#222',
