@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import logo from '../../assets/imgs/logo.png';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   width: 100%;
@@ -13,7 +14,7 @@ const Container = styled.div`
   color: white;
 
   div {
-    margin-top: 10rem;
+    margin-top: 20rem;
     p {
       font-size: 1.5rem;
       margin-bottom: 2rem;
@@ -28,11 +29,11 @@ const Container = styled.div`
   }
 `;
 
-const Last = styled.p`
+const Last = styled(motion.p)`
   margin-top: 3rem;
 `;
 
-const Link = styled.a`
+const Link = styled(motion.a)`
   margin-top: 3rem;
   color: yellow;
   text-decoration: none;
@@ -44,24 +45,62 @@ const Link = styled.a`
 const Home = () => {
   return (
     <Container>
-      <div>
-        <img src={logo} alt="" />
-        <p>
+      <motion.div
+        initial={{
+          x: -500,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+      >
+        <motion.img src={logo} alt="main-logo" />
+        <motion.p
+          initial={{
+            x: -1000,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+          animate={{
+            x: 0,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+        >
           안녕하세요 멋쟁이사자처럼 at 국민대학교에 지원해주셔서 감사합니다!
           <br /> '📄문제' 섹션에 가셔서 기제된 문제들을 푸시면 되겠습니다. 🙇‍♂
           <br />
-        </p>
-        <p>
+        </motion.p>
+        <motion.p
+          initial={{
+            x: -1000,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+          animate={{
+            x: 0,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+        >
           한번 제출한 코드는 '✅전체 제출내역' 에서 '제출한 코드 확인' 후 <br />
           '❌삭제' 이후에 '😲재시도'가 가능합니다
-        </p>
-        <Last>
+        </motion.p>
+        <Last
+          initial={{
+            x: -1000,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+          animate={{
+            x: 0,
+            transition: { type: 'spring', duration: 1.5, delay: 1 },
+          }}
+        >
           문의: 010-9302-1013 이승환 <br />
         </Last>
-        <Link href="https://open.kakao.com/o/sVpSIOYd/" target="blank">
-          1:1 오픈챗 문의 👍
-        </Link>
-      </div>
+        <motion.span whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+          <Link href="https://open.kakao.com/o/sVpSIOYd/" target="blank">
+            1:1 오픈챗 문의 👍
+          </Link>
+        </motion.span>
+      </motion.div>
     </Container>
   );
 };
