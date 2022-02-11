@@ -7,6 +7,7 @@ import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   width: 100%;
@@ -77,7 +78,16 @@ const SubmittedSourceCode = () => {
 
   return (
     <Container>
-      <div>
+      <motion.div
+        initial={{
+          y: 1500,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+        animate={{
+          y: 0,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+      >
         <h1>📄 문제명: {title}</h1>
         <h2>🙋🏻‍♀️ 제출자: {user.displayName}</h2>
         <h2>🧮 내가 제출한 코드</h2>
@@ -86,9 +96,16 @@ const SubmittedSourceCode = () => {
           {sourceCode}
         </SyntaxHighlighter>
         <div>
-          <button onClick={deleteBtnHandler}>❌ 답안 삭제하기</button>
+          <motion.button
+            onClick={deleteBtnHandler}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {' '}
+            ❌ 답안 삭제하기
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
     </Container>
   );
 };
