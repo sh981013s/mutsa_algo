@@ -7,7 +7,6 @@ import {
   NewQuestion,
   Login,
   Submitted,
-  SubmittedDetail,
   Console,
   SetDisplayName,
   SubmittedSourceCode,
@@ -132,17 +131,6 @@ function App() {
                 <Redirect to="/setdisplayname" />
               ) : (
                 <Submitted />
-              )}
-            </Route>
-            <Route exact path="/SubmittedDetail/:name/:title/:id">
-              {!user ? (
-                <Redirect to="/login" />
-              ) : !user?.displayName.includes('20') ? (
-                <Redirect to="/setdisplayname" />
-              ) : !isProved(user?.email) ? (
-                <Redirect to="/" />
-              ) : (
-                <SubmittedDetail />
               )}
             </Route>
             <Route exact path="/SubmittedSourceCode/:name/:title/:id">
