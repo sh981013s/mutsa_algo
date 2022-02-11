@@ -17,12 +17,14 @@ const DisMain = styled(Main)`
   }
 
   button {
-    width: 4rem;
-    height: 2rem;
-    background: #262604;
+    width: 6rem;
+    height: 3rem;
+    background: #898989;
     border: none;
     border-radius: 3rem;
+    font-size: 1.3rem;
     color: white;
+    font-weight: 600;
     &:hover {
       cursor: pointer;
     }
@@ -72,7 +74,7 @@ const SetDisplayName = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          변경
+          설정
         </motion.button>
       </DisMain>
     </Container>

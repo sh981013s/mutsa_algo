@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const Main = styled(motion.div)`
   width: 50%;
   height: 50%;
-  background: #484640;
+  background: #131414;
   padding: 3rem;
   border-radius: 3rem;
   display: flex;
@@ -35,7 +35,7 @@ export const Main = styled(motion.div)`
     border: 1px solid #ffff;
     width: 40%;
     height: 15%;
-    background: #60542f;
+    background: #898989;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@ export const Main = styled(motion.div)`
 
 const Icon = styled(GoogleIcon)`
   margin-left: 1rem;
-  color: yellow;
+  color: #343333;
 `;
 
 const Login = () => {

@@ -83,6 +83,7 @@ const SubmitBtn = styled(motion.div)`
   background: #898989;
   color: black;
   font-weight: 700;
+  font-size: 1.3rem;
   border-radius: 0.4rem;
   display: ${(props) => (props.isLoading ? 'none' : 'inline-flex')};
   justify-content: center;

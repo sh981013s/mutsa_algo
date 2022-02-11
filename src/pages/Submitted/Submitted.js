@@ -23,7 +23,7 @@ const Card = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #31302c;
+  background: #131414;
   color: white;
   border-radius: 3rem;
   -webkit-box-shadow: 6px 5px 15px 1px #898989;
@@ -41,7 +41,7 @@ const InnerBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #31302c;
+  background: #131414;
   color: white;
   border-radius: 3rem;
   text-align: center;
@@ -52,7 +52,7 @@ const InnerBox = styled.div`
 
 const LogoutBtn = styled(motion.button)`
   color: white;
-  background: #9ac060;
+  background: #666667;
   width: 5rem;
   height: 3rem;
   border: 1px solid #ffff;
