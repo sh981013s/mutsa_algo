@@ -7,6 +7,7 @@ import { db } from '../../firebase/firebaseConfig';
 import { useHistory } from 'react-router-dom';
 import { ConsoleLink } from '../Console/Console';
 import { find } from 'lodash';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   width: 80%;
   height: 70vh;
   display: flex;
@@ -49,7 +50,7 @@ const InnerBox = styled.div`
   }
 `;
 
-const LogoutBtn = styled.button`
+const LogoutBtn = styled(motion.button)`
   color: white;
   background: #9ac060;
   width: 5rem;
@@ -113,11 +114,26 @@ const Submitted = () => {
 
   return (
     <Container>
-      <Card>
+      <Card
+        initial={{
+          y: 1500,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+        animate={{
+          y: 0,
+          transition: { type: 'spring', duration: 1.5, delay: 1 },
+        }}
+      >
         <div>
           <Title>
             안녕하세요! {user && user?.displayName}님 😆{' '}
-            <LogoutBtn onClick={logoutFunc}>로그아웃</LogoutBtn>
+            <LogoutBtn
+              onClick={logoutFunc}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              로그아웃
+            </LogoutBtn>
           </Title>
           <InnerBox>
             <div>
@@ -130,7 +146,12 @@ const Submitted = () => {
                       key={item.id}
                       to={`/SubmittedSourceCode/${user.displayName}/${item.title}/${item.id}`}
                     >
-                      <p>👍 {item.title}</p>
+                      <motion.p
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        👍 {item.title}
+                      </motion.p>
                     </ConsoleLink>
                   );
                 })}
