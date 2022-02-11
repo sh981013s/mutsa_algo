@@ -187,8 +187,6 @@ const Solve = ({ match }) => {
       }
     }, 4000);
   };
-  // http://localhost:3000/SubmittedSourceCode/20170109_%EC%9D%B4%EC%8A%B9%ED%99%98/%EB%AC%B8%EC%9E%90%201%EA%B0%9C%20%EC%9E%85%EB%A0%A5%EB%B0%9B%EC%95%84%20%EB%8B%A4%EC%9D%8C%20%EB%AC%B8%EC%9E%90%20%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/undefined
-  // http://localhost:3000/SubmittedSourceCode/20170109_%EC%9D%B4%EC%8A%B9%ED%99%98/%EB%AC%B8%EC%9E%90%201%EA%B0%9C%20%EC%9E%85%EB%A0%A5%EB%B0%9B%EC%95%84%20%EB%8B%A4%EC%9D%8C%20%EB%AC%B8%EC%9E%90%20%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/jwv980U3R4aUz4c781s3
   const getResOfTest = async (input, output) => {
     const response = await fetch(
       'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true',
