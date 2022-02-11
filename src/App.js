@@ -67,7 +67,7 @@ function App() {
           ...props,
           items: [
             ...props.items,
-            { text: '✅ 전체 제출내역', link: '/Console' },
+            { text: '전체 제출내역✅', link: '/Console' },
           ],
         });
       }
