@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 const Container = styled(motion.div)`
   width: 98vw;
-  min-height: 100vh;
+  //min-height: 100vh;
   color: white;
   display: flex;
   flex-wrap: wrap;
@@ -18,7 +18,7 @@ const Container = styled(motion.div)`
 const FlexCell = styled.div`
   padding: 1vw;
   width: 30%;
-  height: 30vh;
+  min-height: 30vh;
   border-bottom: 1px solid #ffff;
   h2 {
     margin-bottom: 2rem;
