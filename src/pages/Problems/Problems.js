@@ -200,7 +200,7 @@ export default function Problems() {
           </Table>
         </StyledTable>
         {isProved(user?.email) && (
-          <StyledLink to="/newQuestion">
+          <StyledLink to="/new-question">
             <NewBtn whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               문제 등록
             </NewBtn>

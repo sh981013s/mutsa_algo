@@ -34,7 +34,7 @@ const props = {
     },
     {
       text: '문제 📄',
-      link: '/Problems',
+      link: '/problems',
     },
     {
       text: '제출내역 🙋🏻‍♂️',
@@ -111,7 +111,7 @@ function App() {
                 <Result />
               )}
             </Route>
-            <Route exact path="/newQuestion">
+            <Route exact path="/new-question">
               {!user ? (
                 <Redirect to="/login" />
               ) : !user?.displayName.includes('20') ? (

@@ -140,7 +140,7 @@ const NewQuestion = () => {
       <Left>
         <TitleContainer>
           <input type="text" placeholder={title} onChange={handleTitleChange} />
-          <StyledLink to="/newQuestion">
+          <StyledLink to="/new-question">
             <NewBtn
               onClick={submitProb}
               whileHover={{ scale: 1.1 }}
