@@ -14,6 +14,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { encode } from '../../utils/codeTranslator';
 import { motion } from 'framer-motion';
+import { useAlert } from 'react-alert';
 
 const Container = styled.div`
   width: 100%;
@@ -100,6 +101,7 @@ const MarkDown = styled(MarkDownRenderer)`
 `;
 
 const Solve = ({ match }) => {
+  const alert = useAlert();
   const { title } = useParams();
   const { user } = useAuthContext();
   const history = useHistory();
@@ -118,7 +120,9 @@ const Solve = ({ match }) => {
       title: title,
       sourceCode: code,
     });
-    alert('🦁 정답입니다!!!!!!!!');
+    const successAlert = await alert.success('🦁 정답입니다!!!!!!!!', {
+      timeout: 8000,
+    });
     history.push('/problems');
   };
 
@@ -162,7 +166,6 @@ const Solve = ({ match }) => {
 
   const testHandler = async () => {
     await setIsLoading(true);
-    // await setTestText('🤖 First test case running... </br> ');
     const firstTestRes = await getResOfTest(
       testValues['test1Input'],
       testValues['test1Output']
@@ -181,11 +184,13 @@ const Solve = ({ match }) => {
       ) {
         await success();
       } else {
-        await alert('😭 오답입니다!');
+        const successAlert = await alert.error('😭 오답입니다!', {
+          timeout: 8000,
+        });
         setIsLoading(false);
         setTestText('');
       }
-    }, 4000);
+    }, 3000);
   };
   const getResOfTest = async (input, output) => {
     const response = await fetch(
