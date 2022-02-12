@@ -9,12 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useReducer, useState } from 'react';
 import { db } from '../../firebase/firebaseConfig';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import isProved from '../../utils/provedEmails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { motion } from 'framer-motion';
+import useDeleteProblem from '../../hooks/useDeleteProblem';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -96,10 +97,29 @@ export const TableLink = styled(StyledLink)`
   }
 `;
 
+const DescSection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  p {
+    margin-left: 1rem;
+  }
+`;
+
+const EditDeleteBtn = styled(motion.button)`
+  border: none;
+  margin-left: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export default function Problems() {
   const { user } = useAuthContext();
+  const { deleteProb } = useDeleteProblem();
   const [problems, setProblems] = useState([]);
   const [solvedProbs, setSolvedProbs] = useState([]);
+  const [num, setNum] = useState(0);
 
   // 전체문제 가져오기
   useEffect(() => {
@@ -142,6 +162,13 @@ export default function Problems() {
     }
   }, []);
 
+  const deleteBtnHandler = async (id) => {
+    await deleteProb(id);
+    setNum(num + 1);
+    console.log(num);
+    console.log('done');
+  };
+
   return (
     <Container>
       <motion.div
@@ -155,7 +182,15 @@ export default function Problems() {
         }}
       >
         <h1>📄 전체 문제</h1>
-        <p>✅ = '통과'</p>
+        <DescSection>
+          {isProved(user.email) && (
+            <>
+              <p>📜 = '문제 수정'</p>
+              <p>❌ = '문제 삭제'</p>
+            </>
+          )}
+          <p>✅ = '통과된 문제'</p>
+        </DescSection>
         <StyledTable sx={{ width: '100%' }} component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -177,10 +212,29 @@ export default function Problems() {
                       <StyledTableRow key={single.title}>
                         <StyledTableCell align="center">
                           <TableLink
-                            to={`/SubmittedSourceCode/${user.displayName}/${single.title}/${tmp[0].id}`}
+                            to={`/submitted-sourcecode/${user.displayName}/${single.title}/${tmp[0].id}`}
                           >
                             <span>{single.title} ✅</span>
                           </TableLink>
+                          {isProved(user.email) && (
+                            <>
+                              <EditDeleteBtn
+                                whileHover={{ scale: 1.3 }}
+                                whileTap={{ scale: 0.9 }}
+                              >
+                                📜
+                              </EditDeleteBtn>
+                              <EditDeleteBtn
+                                whileHover={{ scale: 1.3 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => {
+                                  deleteBtnHandler(tmp[0].id);
+                                }}
+                              >
+                                ❌
+                              </EditDeleteBtn>
+                            </>
+                          )}
                         </StyledTableCell>
                       </StyledTableRow>
                     );
@@ -191,6 +245,25 @@ export default function Problems() {
                           <TableLink to={`/solve/${single.title}`}>
                             {single.title}
                           </TableLink>
+                          {isProved(user.email) && (
+                            <>
+                              <EditDeleteBtn
+                                whileHover={{ scale: 1.3 }}
+                                whileTap={{ scale: 0.9 }}
+                              >
+                                📜
+                              </EditDeleteBtn>
+                              <EditDeleteBtn
+                                whileHover={{ scale: 1.3 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => {
+                                  deleteBtnHandler(single.id);
+                                }}
+                              >
+                                ❌
+                              </EditDeleteBtn>
+                            </>
+                          )}
                         </StyledTableCell>
                       </StyledTableRow>
                     );

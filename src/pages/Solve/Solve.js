@@ -114,7 +114,6 @@ const Solve = ({ match }) => {
   const [instruc, setInstruc] = useState('');
   const [testValues, setTestValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [isTesting, setIsTesting] = useState(false);
   const [testText, setTestText] = useState('');
 
   const success = async () => {
