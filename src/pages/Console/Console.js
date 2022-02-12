@@ -5,6 +5,10 @@ import { find } from 'lodash';
 import styled from 'styled-components';
 import { TableLink } from '../Problems/Problems';
 import { motion } from 'framer-motion';
+import isProved from '../../utils/provedEmails';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useHistory } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 const Container = styled(motion.div)`
   width: 98vw;
@@ -36,6 +40,9 @@ export const ConsoleLink = styled(TableLink)`
 `;
 
 const Console = () => {
+  const { user } = useAuthContext();
+  const history = useHistory();
+  const alert = useAlert();
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -75,6 +82,15 @@ const Console = () => {
       setUserList(res);
     });
     return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    if (!isProved(user.email)) {
+      const blockAlert = alert.error('😭 운영진만 접근이 허가됩니다.', {
+        timeout: 8000,
+      });
+      history.push('/');
+    }
   }, []);
 
   return (

@@ -25,7 +25,7 @@ const Container = styled.div`
   background: #2a2b2d;
 `;
 
-const props = {
+const menuProps = {
   items: [
     {
       text: 'Home 🏠',
@@ -38,6 +38,10 @@ const props = {
     {
       text: '제출내역 🙋🏻‍♂️',
       link: '/submitted',
+    },
+    {
+      text: 'Admin 👨‍👩‍👧‍👧',
+      link: '/admin',
     },
   ],
   logo: {
@@ -57,23 +61,11 @@ const props = {
 
 function App() {
   const { user, authIsReady } = useAuthContext();
-  const [menu, setMenu] = useState(props);
-
-  useEffect(() => {
-    if (user) {
-      if (isProved(user.email)) {
-        setMenu({
-          ...props,
-          items: [...props.items, { text: '전체 제출내역✅', link: '/admin' }],
-        });
-      }
-    }
-  }, [user]);
 
   return (
     <>
       <GlobalStyle />
-      <Navbar {...menu} />
+      <Navbar {...menuProps} />
       <Container>
         {authIsReady && (
           <Switch>
@@ -138,8 +130,6 @@ function App() {
                 <Redirect to="/login" />
               ) : !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
-              ) : !isProved(user?.email) ? (
-                <Redirect to="/" />
               ) : (
                 <Console />
               )}
