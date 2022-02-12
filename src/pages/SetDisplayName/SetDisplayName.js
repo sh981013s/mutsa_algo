@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useAlert } from 'react-alert';
 
 const DisMain = styled(Main)`
   h1 {
@@ -32,7 +34,9 @@ const DisMain = styled(Main)`
 `;
 
 const SetDisplayName = () => {
+  const alert = useAlert();
   const history = useHistory();
+  const { user } = useAuthContext();
   const auth = getAuth();
   const [nickName, setNickName] = useState('');
 
@@ -44,7 +48,18 @@ const SetDisplayName = () => {
 
   const displaySubmit = async () => {
     await changeDisplayName();
-    history.push('/');
+    setTimeout(() => {
+      if (user.displayName.includes('20')) {
+        const successAlert = alert.success('🦁 이름설정 완료', {
+          timeout: 4000,
+        });
+        history.push('/problems');
+      } else {
+        const wrongAlert = alert.error('😭 학번과 이름을 확인해주세요', {
+          timeout: 4000,
+        });
+      }
+    }, 1000);
   };
 
   return (

@@ -64,10 +64,7 @@ function App() {
       if (isProved(user.email)) {
         setMenu({
           ...props,
-          items: [
-            ...props.items,
-            { text: '전체 제출내역✅', link: '/Console' },
-          ],
+          items: [...props.items, { text: '전체 제출내역✅', link: '/admin' }],
         });
       }
     }
@@ -101,15 +98,6 @@ function App() {
                 <Solve />
               )}
             </Route>
-            <Route exact path="/result">
-              {!user ? (
-                <Redirect to="/login" />
-              ) : !user?.displayName.includes('20') ? (
-                <Redirect to="/setdisplayname" />
-              ) : (
-                <Result />
-              )}
-            </Route>
             <Route exact path="/new-question">
               {!user ? (
                 <Redirect to="/login" />
@@ -122,18 +110,21 @@ function App() {
               )}
             </Route>
             <Route exact path="/login">
-              {user ? <Redirect to="/" /> : <Login />}
+              {/*{user ? <Redirect to="/" /> : <Login />}*/}
+              {!user && <Login />}
+              {user && !user?.displayName.includes('20') && <SetDisplayName />}
+              <Problems />
             </Route>
             <Route exact path="/submitted">
               {!user ? (
                 <Redirect to="/login" />
-              ) : !user?.displayName.includes('20') ? (
+              ) : user && !user?.displayName.includes('20') ? (
                 <Redirect to="/setdisplayname" />
               ) : (
                 <Submitted />
               )}
             </Route>
-            <Route exact path="/SubmittedSourceCode/:name/:title/:id">
+            <Route exact path="/submitted-sourcecode/:name/:title/:id">
               {!user ? (
                 <Redirect to="/login" />
               ) : !user?.displayName.includes('20') ? (
@@ -142,7 +133,7 @@ function App() {
                 <SubmittedSourceCode />
               )}
             </Route>
-            <Route exact path="/console">
+            <Route exact path="/admin">
               {!user ? (
                 <Redirect to="/login" />
               ) : !user?.displayName.includes('20') ? (

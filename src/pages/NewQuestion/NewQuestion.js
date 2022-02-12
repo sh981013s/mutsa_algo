@@ -110,10 +110,6 @@ const NewQuestion = () => {
     setTitle(e.target.value);
   };
 
-  useEffect(() => {
-    console.log(testInputOneCheck);
-  }, [testInputOneCheck]);
-
   const submitProb = async () => {
     await addDoc(collection(db, 'probs/'), {
       writer: user.displayName,

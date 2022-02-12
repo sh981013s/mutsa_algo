@@ -144,7 +144,7 @@ const Submitted = () => {
                   return (
                     <ConsoleLink
                       key={item.id}
-                      to={`/SubmittedSourceCode/${user.displayName}/${item.title}/${item.id}`}
+                      to={`/submitted-sourcecode/${user.displayName}/${item.title}/${item.id}`}
                     >
                       <motion.p
                         whileHover={{ scale: 1.1 }}

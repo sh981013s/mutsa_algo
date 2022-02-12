@@ -99,7 +99,7 @@ const Console = () => {
                 return (
                   <ConsoleLink
                     key={title.title}
-                    to={`/SubmittedSourceCode/${person.name}/${title.title}/${title.id}`}
+                    to={`/submitted-sourcecode/${person.name}/${title.title}/${title.id}`}
                   >
                     <motion.p
                       whileHover={{ scale: 1.1 }}
