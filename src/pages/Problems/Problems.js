@@ -8,14 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useCallback, useEffect, useReducer, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { db } from '../../firebase/firebaseConfig';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { deleteDoc, doc } from 'firebase/firestore';
 import isProved from '../../utils/provedEmails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { motion } from 'framer-motion';
-import useDeleteProblem from '../../hooks/useDeleteProblem';
+import useGetProbs from '../../hooks/useGetProbs';
+import { useAlert } from 'react-alert';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -106,9 +106,9 @@ const DescSection = styled.div`
   }
 `;
 
-const EditDeleteBtn = styled(motion.button)`
+export const EditDeleteBtn = styled(motion.button)`
   border: none;
-  margin-left: 1rem;
+  margin-left: 5rem;
   &:hover {
     cursor: pointer;
   }
@@ -116,57 +116,24 @@ const EditDeleteBtn = styled(motion.button)`
 
 export default function Problems() {
   const { user } = useAuthContext();
-  const { deleteProb } = useDeleteProblem();
-  const [problems, setProblems] = useState([]);
-  const [solvedProbs, setSolvedProbs] = useState([]);
-  const [num, setNum] = useState(0);
+  const history = useHistory();
+  const alert = useAlert();
 
-  // 전체문제 가져오기
-  useEffect(() => {
-    const tmp = [];
-    let ref = collection(db, 'probs');
-    ref = query(ref);
-    const unsub = onSnapshot(ref, (snapshot) => {
-      // eslint-disable-next-line array-callback-return
-      snapshot.docs.map((doc) => {
-        let single = doc._document.data.value.mapValue.fields;
-        tmp.push({
-          title: single.title.stringValue,
-          writer: single.writer.stringValue,
-          instruction: single.instruction.stringValue,
-          id: doc.id,
-        });
-      });
-      setProblems(tmp);
-    });
-    return () => unsub();
-  }, []);
-
-  // 유저가 푼 문제들
-  useEffect(() => {
-    if (user) {
-      let ref = collection(db, 'submitted');
-      ref = query(ref, where('writer', '==', user.displayName));
-      const unsub = onSnapshot(ref, (snapshot) => {
-        const solvedArr = [];
-        snapshot.docs.map((single) => {
-          const singleTmpObj = {};
-          singleTmpObj.title =
-            single._document.data.value.mapValue.fields.title.stringValue;
-          singleTmpObj.id = single.id;
-          solvedArr.push(singleTmpObj);
-        });
-        setSolvedProbs(solvedArr);
-      });
-      return () => unsub();
-    }
-  }, []);
+  const { entireProbs: problems, userSolvedProbs: solvedProbs } = useGetProbs(
+    'submitted',
+    ['writer', '==', user.displayName]
+  );
 
   const deleteBtnHandler = async (id) => {
+    const deleteProb = async (id) => {
+      const ref = doc(db, 'probs', id);
+      await deleteDoc(ref);
+    };
     await deleteProb(id);
-    setNum(num + 1);
-    console.log(num);
-    console.log('done');
+    const successAlert = alert.error('❌ 문제 삭제 완료', {
+      timeout: 4000,
+    });
+    history.push('/');
   };
 
   return (
@@ -228,7 +195,7 @@ export default function Problems() {
                                 whileHover={{ scale: 1.3 }}
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => {
-                                  deleteBtnHandler(tmp[0].id);
+                                  deleteBtnHandler(single.id);
                                 }}
                               >
                                 ❌
