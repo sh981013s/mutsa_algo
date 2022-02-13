@@ -121,7 +121,7 @@ export default function Problems() {
 
   const { entireProbs: problems, userSolvedProbs: solvedProbs } = useGetProbs(
     'submitted',
-    ['writer', '==', user.displayName]
+    ['writer', '==', user?.displayName]
   );
 
   const deleteBtnHandler = async (id) => {
@@ -150,7 +150,7 @@ export default function Problems() {
       >
         <h1>📄 전체 문제</h1>
         <DescSection>
-          {isProved(user.email) && (
+          {isProved(user?.email) && (
             <>
               <p>📜 = '문제 수정'</p>
               <p>❌ = '문제 삭제'</p>
@@ -179,11 +179,11 @@ export default function Problems() {
                       <StyledTableRow key={single.title}>
                         <StyledTableCell align="center">
                           <TableLink
-                            to={`/submitted-sourcecode/${user.displayName}/${single.title}/${tmp[0].id}`}
+                            to={`/submitted-sourcecode/${user?.displayName}/${single.title}/${tmp[0].id}`}
                           >
                             <span>{single.title} ✅</span>
                           </TableLink>
-                          {isProved(user.email) && (
+                          {isProved(user?.email) && (
                             <>
                               <EditDeleteBtn
                                 whileHover={{ scale: 1.3 }}
@@ -214,7 +214,7 @@ export default function Problems() {
                           <TableLink to={`/solve/${single.title}`}>
                             {single.title}
                           </TableLink>
-                          {isProved(user.email) && (
+                          {isProved(user?.email) && (
                             <>
                               <EditDeleteBtn
                                 whileHover={{ scale: 1.3 }}
