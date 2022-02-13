@@ -28,6 +28,9 @@ export const Left = styled(Panel)`
   .w-md-editor {
     height: 60vh !important;
   }
+  .w-md-editor-content {
+    height: 100% !important;
+  }
 `;
 
 export const TitleContainer = styled.div`
