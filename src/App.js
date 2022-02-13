@@ -2,7 +2,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import {
   Home,
   Solve,
-  Result,
   Problems,
   NewQuestion,
   Login,
@@ -17,7 +16,6 @@ import 'responsive-navbar-react/dist/index.css';
 import styled from 'styled-components';
 import { useAuthContext } from './hooks/useAuthContext';
 import isProved from './utils/provedEmails';
-import { useEffect, useState } from 'react';
 import { menuProps } from './utils/constants/constants';
 
 const Container = styled.div`
@@ -69,7 +67,6 @@ function App() {
               )}
             </Route>
             <Route exact path="/login">
-              {/*{user ? <Redirect to="/" /> : <Login />}*/}
               {!user && <Login />}
               {user && !user?.displayName.includes('20') && <SetDisplayName />}
               <Problems />
