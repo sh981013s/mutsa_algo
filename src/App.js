@@ -18,46 +18,13 @@ import styled from 'styled-components';
 import { useAuthContext } from './hooks/useAuthContext';
 import isProved from './utils/provedEmails';
 import { useEffect, useState } from 'react';
+import { menuProps } from './utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   background: #2a2b2d;
 `;
-
-const menuProps = {
-  items: [
-    {
-      text: 'Home 🏠',
-      link: '/',
-    },
-    {
-      text: '문제 📄',
-      link: '/problems',
-    },
-    {
-      text: '제출내역 🙋🏻‍♂️',
-      link: '/submitted',
-    },
-    {
-      text: 'Admin 👨‍👩‍👧‍👧',
-      link: '/admin',
-    },
-  ],
-  logo: {
-    text: '🦁 멋쟁이 사자처럼 at 국민대 사전과제',
-    link: '/',
-  },
-  style: {
-    barStyles: {
-      background: '#2a2b2d',
-    },
-    sidebarStyles: {
-      background: '#222',
-      buttonColor: 'white',
-    },
-  },
-};
 
 function App() {
   const { user, authIsReady } = useAuthContext();
