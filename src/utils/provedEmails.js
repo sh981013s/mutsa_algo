@@ -14,6 +14,7 @@ const provedEmails = [
   'ss.ssoye00@gmail.com',
   'rkdtmddnjs97@gmail.com ',
   'gjdigj145@gmail.com',
+  'kau96kim@gmail.com',
 ];
 
 const isProved = (email) => {
