@@ -106,9 +106,9 @@ const DescSection = styled.div`
   }
 `;
 
-export const EditDeleteBtn = styled(motion.button)`
+const EditDeleteBtn = styled(motion.button)`
   border: none;
-  margin-left: 5rem;
+  margin-left: 1rem;
   &:hover {
     cursor: pointer;
   }
@@ -218,7 +218,9 @@ export default function Problems() {
                                 whileHover={{ scale: 1.3 }}
                                 whileTap={{ scale: 0.9 }}
                               >
-                                📜
+                                <Link to={`/new-question/${single.id}`}>
+                                  📜
+                                </Link>
                               </EditDeleteBtn>
                               <EditDeleteBtn
                                 whileHover={{ scale: 1.3 }}

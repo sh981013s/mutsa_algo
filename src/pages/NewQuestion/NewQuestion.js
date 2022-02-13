@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NewBtn, StyledLink } from '../Problems/Problems';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 import MarkdownEditor from '../../components/NewQuestion/MarkdownEditor';
-import MarkdownPreview from '../../components/NewQuestion/MarkdownPreview';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useAlert } from 'react-alert';
 
 const Container = styled.div`
   width: 100%;
@@ -21,16 +21,13 @@ const Panel = styled.div`
 `;
 
 export const Left = styled(Panel)`
-  width: 50%;
+  width: 100%;
   background-color: rgb(38, 50, 56);
   flex-direction: column;
   height: 92vh;
-`;
-
-export const Right = styled(Panel)`
-  width: 50%;
-  background-color: #fff;
-  height: 92vh;
+  .w-md-editor {
+    height: 60vh !important;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -57,14 +54,14 @@ const TestContainer = styled.div`
   height: 35vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
+  padding-left: 3rem;
   color: #fff;
   background-color: rgb(52, 58, 64);
   width: 100%;
   div {
     display: flex;
-    //margin: 1rem;
-    width: 100%;
+    width: 60%;
     span {
       font-size: 1rem;
       margin-right: 0.5rem;
@@ -78,22 +75,33 @@ const TestContainer = styled.div`
 `;
 
 const MdEditor = styled(MarkdownEditor)`
-  height: 45vh;
+  height: 60vh;
 `;
 
 const NewQuestion = () => {
   const history = useHistory();
+  const alert = useAlert();
   const { user } = useAuthContext();
+  const { id } = useParams();
   const [value, setValue] = useState(
-    `List 형태나 Object 형태는 테스트케이스로 불가능합니다. </br> 
-    ex) 1 or 멋사 </br>
-    테스트값의 default type 은 string 입니다.</br>
-    만약 number 를 넣고싶다면 꼭 체크해주세요!</br>
-    문제 등록 전 꼭 제목, 본문, 인풋들과 아웃풋이 채워져있는지 확인해주세용</br>
-    체크박스는 number 일때만 '선택'입니다.
+    `### 문제등록 및 수정은 'Markdown' 형식으로 작성해주세요.
+
+### List 형태나 Object 형태는 테스트케이스로 불가능합니다.  
+
+     - ex) 1 or 멋사
+
+     - 테스트값의 default type 은 string 입니다.
+
+     - 만약 number 를 넣고싶다면 꼭 체크해주세요!
+
+     - 문제 등록 전 꼭 제목, 본문, 인풋들과 아웃풋이 채워져있는지 확인해주세용
+
+     - 체크박스는 number 일때만 '선택'입니다.
     `
   );
-  const [title, setTitle] = useState('제목을 입력해주세요');
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [title, setTitle] = useState('');
   const [testInputOne, setTestInputOne] = useState('');
   const [testInputTwo, setTestInputTwo] = useState('');
 
@@ -109,6 +117,34 @@ const NewQuestion = () => {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
+
+  useEffect(() => {
+    if (id) {
+      setIsEditMode(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isEditMode) {
+      const tmp = async () => {
+        const docRef = doc(db, 'probs', id);
+        const docSnap = await getDoc(docRef);
+        const data = await docSnap.data();
+        setTitle(data.title);
+        setValue(data.instruction);
+        console.log(data.instruction);
+        setTestInputOne(data.test1Input);
+        setTestInputOneCheck(typeof data.test1Input === 'number');
+        setTestInputTwo(data.test2Input);
+        setTestInputTwoCheck(typeof data.test2Input === 'number');
+        setTestOutputOne(data.test1Output);
+        setTestOutputOneCheck(typeof data.test1Output === 'number');
+        setTestOutputTwo(data.test2Output);
+        setTestOutputTwoCheck(typeof data.test2Output === 'number');
+      };
+      tmp();
+    }
+  }, [isEditMode]);
 
   const submitProb = async () => {
     await addDoc(collection(db, 'probs/'), {
@@ -128,6 +164,33 @@ const NewQuestion = () => {
         ? Number(testOutputTwo)
         : testOutputTwo.toString(),
     });
+    const success = alert.success('문제 등록 완료!', {
+      timeout: 8000,
+    });
+    history.push('/problems');
+  };
+
+  const editProb = async () => {
+    const existingProb = doc(db, 'probs', id);
+    await updateDoc(existingProb, {
+      title: title,
+      instruction: value,
+      test1Input: testInputOneCheck
+        ? Number(testInputOne)
+        : testInputOne.toString(),
+      test2Input: testInputTwoCheck
+        ? Number(testInputTwo)
+        : testInputTwo.toString(),
+      test1Output: testOutputOneCheck
+        ? Number(testOutputOne)
+        : testOutputOne.toString(),
+      test2Output: testOutputTwoCheck
+        ? Number(testOutputTwo)
+        : testOutputTwo.toString(),
+    });
+    const success = alert.success('문제 수정 완료!', {
+      timeout: 8000,
+    });
     history.push('/problems');
   };
 
@@ -135,18 +198,35 @@ const NewQuestion = () => {
     <Container>
       <Left>
         <TitleContainer>
-          <input type="text" placeholder={title} onChange={handleTitleChange} />
-          <StyledLink to="/new-question">
-            <NewBtn
-              onClick={submitProb}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              문제 등록
-            </NewBtn>
-          </StyledLink>
+          <input
+            type="text"
+            placeholder="제목을 입력해주세요"
+            value={title ? title : null}
+            onChange={handleTitleChange}
+          />
+          {isEditMode ? (
+            <StyledLink to="/new-question">
+              <NewBtn
+                onClick={editProb}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                문제 수정 완료
+              </NewBtn>
+            </StyledLink>
+          ) : (
+            <StyledLink to="/new-question">
+              <NewBtn
+                onClick={submitProb}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                문제 등록
+              </NewBtn>
+            </StyledLink>
+          )}
         </TitleContainer>
-        <MdEditor body={value} edit={setValue} />
+        <MdEditor body={value} edit={setValue} height={500} />
         <TestContainer>
           <div>
             <div>
@@ -156,10 +236,11 @@ const NewQuestion = () => {
                 type="text"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                value={testInputOne}
               />
             </div>
             <div>
-              <span>🔢 number :</span>
+              <span>🔢 isNumber :</span>
               <motion.input
                 type="checkbox"
                 onChange={() => {
@@ -167,6 +248,7 @@ const NewQuestion = () => {
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                checked={testInputOneCheck}
               />
             </div>
           </div>
@@ -178,10 +260,11 @@ const NewQuestion = () => {
                 type="text"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                value={testOutputOne}
               />
             </div>
             <div>
-              <span>🔢 number :</span>
+              <span>🔢 isNumber :</span>
               <motion.input
                 type="checkbox"
                 onChange={() => {
@@ -189,6 +272,7 @@ const NewQuestion = () => {
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                checked={testOutputOneCheck}
               />
             </div>
           </div>
@@ -200,10 +284,11 @@ const NewQuestion = () => {
                 type="text"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                value={testInputTwo}
               />
             </div>
             <div>
-              <span>🔢 number :</span>
+              <span>🔢 isNumber :</span>
               <motion.input
                 type="checkbox"
                 onChange={() => {
@@ -211,6 +296,7 @@ const NewQuestion = () => {
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                checked={testInputTwoCheck}
               />
             </div>
           </div>
@@ -222,10 +308,11 @@ const NewQuestion = () => {
                 type="text"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                value={testOutputTwo}
               />
             </div>
             <div>
-              <span>🔢 number :</span>
+              <span>🔢 isNumber :</span>
               <motion.input
                 type="checkbox"
                 onChange={() => {
@@ -233,14 +320,12 @@ const NewQuestion = () => {
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                checked={testOutputTwoCheck}
               />
             </div>
           </div>
         </TestContainer>
       </Left>
-      <Right>
-        <MarkdownPreview title={title} body={value} />
-      </Right>
     </Container>
   );
 };

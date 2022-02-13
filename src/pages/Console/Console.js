@@ -12,7 +12,6 @@ import { useAlert } from 'react-alert';
 
 const Container = styled(motion.div)`
   width: 98vw;
-  //min-height: 100vh;
   color: white;
   display: flex;
   flex-wrap: wrap;

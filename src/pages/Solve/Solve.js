@@ -15,6 +15,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { encode } from '../../utils/codeTranslator';
 import { motion } from 'framer-motion';
 import { useAlert } from 'react-alert';
+import MDEditor from '@uiw/react-md-editor';
 
 const Container = styled.div`
   width: 100%;
@@ -37,6 +38,24 @@ const Instruction = styled(motion.div)`
   background: #212325;
   -webkit-box-shadow: 6px 5px 15px 1px #898989;
   box-shadow: 6px 5px 15px 1px #898989;
+  .wmde-markdown {
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: #898989;
+      box-shadow: #000;
+    }
+  }
+  .dJRmu {
+    padding: 0;
+  }
 `;
 
 const BoxHead = styled.div`
@@ -96,10 +115,9 @@ const SubmitBtn = styled(motion.div)`
   }
 `;
 
-const MarkDown = styled(MarkDownRenderer)`
-  width: 90%;
+const MarkDown = styled(MDEditor.Markdown)`
+  width: 100%;
   height: 90%;
-  padding: 5rem;
   overflow-y: scroll;
 `;
 
@@ -247,7 +265,7 @@ const Solve = ({ match }) => {
           {isLoading ? (
             <MarkDown body={testText} />
           ) : (
-            <MarkDown body={instruc} />
+            <MarkDown source={instruc} />
           )}
         </Instruction>
         <Editor>

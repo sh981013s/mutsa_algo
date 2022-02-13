@@ -90,7 +90,7 @@ function App() {
                 <Solve />
               )}
             </Route>
-            <Route exact path="/new-question">
+            <Route path="/new-question/:id?">
               {!user ? (
                 <Redirect to="/login" />
               ) : !user?.displayName.includes('20') ? (
