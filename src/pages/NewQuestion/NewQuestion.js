@@ -135,7 +135,6 @@ const NewQuestion = () => {
         const data = await docSnap.data();
         setTitle(data.title);
         setValue(data.instruction);
-        console.log(data.instruction);
         setTestInputOne(data.test1Input);
         setTestInputOneCheck(typeof data.test1Input === 'number');
         setTestInputTwo(data.test2Input);
