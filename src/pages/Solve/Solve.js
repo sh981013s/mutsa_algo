@@ -263,7 +263,7 @@ const Solve = ({ match }) => {
         >
           <BoxHead>Instructions</BoxHead>
           {isLoading ? (
-            <MarkDown body={testText} />
+            <MarkDown source={testText} />
           ) : (
             <MarkDown source={instruc} />
           )}
