@@ -11,8 +11,16 @@
 
 ## 🖥 Demo
 
-[📀 Video](https://www.youtube.com/watch?v=XMJ8WFAH_tE&ab_channel=%EC%9D%B4%EC%8A%B9%ED%99%98)
-[🟡 Website](https://kmumutsaalgo.netlify.app/)
+![](.README_images/cd43ab53.png)
+
+![](.README_images/99a22707.png)
+
+![](.README_images/eccbb04b.png)
+
+![](.README_images/4d6d3f17.png)
+
+* `Live Demo viodeo on Youtube video:` <a href="https://www.youtube.com/watch?v=XMJ8WFAH_tE&ab_channel=%EC%9D%B4%EC%8A%B9%ED%99%98" target="\_blank">https://www.youtube.com/watch?v=XMJ8WFAH_tE&ab_channel=%EC%9D%B4%EC%8A%B9%ED%99%98</a>
+* `Live Demo on Netlify:` <a href="https://kmumutsaalgo.netlify.app/" target="\_blank">https://kmumutsaalgo.netlify.app/</a>
 
 ## 🎠 기능
 
@@ -34,6 +42,14 @@
 #### 💻 System
 
 - [x] **유저 소스코드 제출시 테스트 이후 통과 여부 display**
+
+## 📀 Setup Locally
+```bash
+git clone https://github.com/sh981013s/mutsa_algo.git
+cd musta_algo
+npm install
+npm run start
+```
 
 ## 📚 Used packages
 
