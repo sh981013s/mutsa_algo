@@ -189,7 +189,9 @@ export default function Problems() {
                                 whileHover={{ scale: 1.3 }}
                                 whileTap={{ scale: 0.9 }}
                               >
-                                📜
+                                <Link to={`/new-question/${single.id}`}>
+                                  📜
+                                </Link>
                               </EditDeleteBtn>
                               <EditDeleteBtn
                                 whileHover={{ scale: 1.3 }}
