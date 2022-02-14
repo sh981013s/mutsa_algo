@@ -43,6 +43,7 @@
 
 #### 💻 System
 
+- [x] **Suspense & lazy 사용하여 로딩 화면 구현**
 - [x] **유저 소스코드 제출시 테스트 이후 통과 여부 display**
 
 ## 📀 Setup Locally
