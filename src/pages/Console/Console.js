@@ -9,6 +9,7 @@ import isProved from '../../utils/provedEmails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useHistory } from 'react-router-dom';
 import { useAlert } from 'react-alert';
+import { buttonScale, minusXAnimation } from '../../utils/constants/constants';
 
 const Container = styled(motion.div)`
   width: 98vw;
@@ -94,14 +95,8 @@ const Console = () => {
 
   return (
     <Container
-      initial={{
-        x: -5000,
-        transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-      }}
-      animate={{
-        x: 0,
-        transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-      }}
+      initial={minusXAnimation.initial}
+      animate={minusXAnimation.animate}
     >
       {userList.length > 0 &&
         userList.map((person) => {
@@ -117,8 +112,8 @@ const Console = () => {
                     to={`/submitted-sourcecode/${person.name}/${title.title}/${title.id}`}
                   >
                     <motion.p
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
+                      whileHover={buttonScale.whileHover}
+                      whileTap={buttonScale.whileTap}
                     >
                       📄 {title.title} ✅
                     </motion.p>

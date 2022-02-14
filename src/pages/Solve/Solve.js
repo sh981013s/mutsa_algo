@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styled from 'styled-components';
-import MarkDownRenderer from '../../components/NewQuestion/MarkDownRenderer';
 import {
   addDoc,
   collection,
@@ -16,6 +15,12 @@ import { encode } from '../../utils/codeTranslator';
 import { motion } from 'framer-motion';
 import { useAlert } from 'react-alert';
 import MDEditor from '@uiw/react-md-editor';
+import {
+  buttonScale,
+  minusXAnimation,
+  plusXAnimation,
+  plusYAnimation,
+} from '../../utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -212,6 +217,7 @@ const Solve = ({ match }) => {
       }
     }, 3000);
   };
+
   const getResOfTest = async (input, output) => {
     const response = await fetch(
       'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true',
@@ -252,14 +258,8 @@ const Solve = ({ match }) => {
     <Container>
       <CodeContainer>
         <Instruction
-          initial={{
-            x: -5000,
-            transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-          }}
-          animate={{
-            x: 0,
-            transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-          }}
+          initial={minusXAnimation.initial}
+          animate={minusXAnimation.animate}
         >
           <BoxHead>Instructions</BoxHead>
           {isLoading ? (
@@ -270,14 +270,8 @@ const Solve = ({ match }) => {
         </Instruction>
         <Editor>
           <Solution
-            initial={{
-              x: +1500,
-              transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-            }}
-            animate={{
-              x: 0,
-              transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-            }}
+            initial={plusXAnimation.initial}
+            animate={plusXAnimation.animate}
           >
             <BoxHead>Solution</BoxHead>
             <Code
@@ -299,16 +293,10 @@ const Solve = ({ match }) => {
             {isLoading && <p>🤖 코드 테스트중 . . .</p>}
             <SubmitBtn
               onClick={testHandler}
-              initial={{
-                y: 1500,
-                transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-              }}
-              animate={{
-                y: 0,
-                transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              initial={plusYAnimation.initial}
+              animate={plusYAnimation.animate}
+              whileHover={buttonScale.whileHover}
+              whileTap={buttonScale.whileTap}
               isLoading={isLoading}
             >
               소스코드 제출

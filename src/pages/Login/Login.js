@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useLogin } from '../../hooks/useLogin';
 import { motion } from 'framer-motion';
+import { minusXAnimation, buttonScale } from '../../utils/constants/constants';
 
 export const Container = styled.div`
   width: 100%;
@@ -56,21 +57,12 @@ const Login = () => {
 
   return (
     <Container>
-      <Main
-        initial={{
-          x: -5000,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-        animate={{
-          x: 0,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-      >
+      <Main initial={minusXAnimation.initial} animate={minusXAnimation.animate}>
         <h1>Login</h1>
         <motion.div
           onClick={login}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={buttonScale.whileHover}
+          whileTap={buttonScale.whileTap}
         >
           Login via Google
           <Icon />

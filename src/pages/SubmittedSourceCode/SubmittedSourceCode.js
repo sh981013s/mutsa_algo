@@ -8,6 +8,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
+import { plusYAnimation, buttonScale } from '../../utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -79,14 +80,8 @@ const SubmittedSourceCode = () => {
   return (
     <Container>
       <motion.div
-        initial={{
-          y: 1500,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-        animate={{
-          y: 0,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
+        initial={plusYAnimation.initial}
+        animate={plusYAnimation.animate}
       >
         <h1>📄 문제명: {title}</h1>
         <h2>🙋🏻‍♀️ 제출자: {name}</h2>
@@ -98,8 +93,8 @@ const SubmittedSourceCode = () => {
         <div>
           <motion.button
             onClick={deleteBtnHandler}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={buttonScale.whileHover}
+            whileTap={buttonScale.whileTap}
           >
             {' '}
             ❌ 답안 삭제하기

@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { ConsoleLink } from '../Console/Console';
 import { find } from 'lodash';
 import { motion } from 'framer-motion';
+import { plusYAnimation, buttonScale } from '../../utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -114,23 +115,14 @@ const Submitted = () => {
 
   return (
     <Container>
-      <Card
-        initial={{
-          y: 1500,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-        animate={{
-          y: 0,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-      >
+      <Card initial={plusYAnimation.initial} animate={plusYAnimation.animate}>
         <div>
           <Title>
             안녕하세요! {user && user?.displayName}님 😆{' '}
             <LogoutBtn
               onClick={logoutFunc}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={buttonScale.whileHover}
+              whileTap={buttonScale.whileTap}
             >
               로그아웃
             </LogoutBtn>
@@ -147,8 +139,8 @@ const Submitted = () => {
                       to={`/submitted-sourcecode/${user.displayName}/${item.title}/${item.id}`}
                     >
                       <motion.p
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={buttonScale.whileHover}
+                        whileTap={buttonScale.whileTap}
                       >
                         👍 {item.title}
                       </motion.p>

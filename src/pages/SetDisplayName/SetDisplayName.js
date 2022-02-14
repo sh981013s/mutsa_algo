@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useAlert } from 'react-alert';
+import { minusXAnimation, buttonScale } from '../../utils/constants/constants';
 
 const DisMain = styled(Main)`
   h1 {
@@ -65,14 +66,8 @@ const SetDisplayName = () => {
   return (
     <Container>
       <DisMain
-        initial={{
-          x: -5000,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-        animate={{
-          x: 0,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
+        initial={minusXAnimation.initial}
+        animate={minusXAnimation.animate}
       >
         <h1>🦁 이름 설정</h1>
         <p>'학번', '_'(언더스코어), '이름' 순으로</p>
@@ -81,13 +76,13 @@ const SetDisplayName = () => {
           type="text"
           placeholder="20170109_이승환"
           onChange={(e) => setNickName(e.target.value)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={buttonScale.whileHover}
+          whileTap={buttonScale.whileTap}
         />
         <motion.button
           onClick={displaySubmit}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={buttonScale.whileHover}
+          whileTap={buttonScale.whileTap}
         >
           설정
         </motion.button>

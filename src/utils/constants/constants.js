@@ -51,3 +51,25 @@ export const minusXAnimation = {
     transition: { type: 'spring', duration: 0.6, delay: 0.1 },
   },
 };
+
+export const plusXAnimation = {
+  initial: {
+    x: 5000,
+    transition: { type: 'spring', duration: 0.6, delay: 0.1 },
+  },
+  animate: {
+    x: 0,
+    transition: { type: 'spring', duration: 0.6, delay: 0.1 },
+  },
+};
+
+export const plusYAnimation = {
+  initial: {
+    y: 1500,
+    transition: { type: 'spring', duration: 0.6, delay: 0.1 },
+  },
+  animate: {
+    y: 0,
+    transition: { type: 'spring', duration: 0.6, delay: 0.1 },
+  },
+};

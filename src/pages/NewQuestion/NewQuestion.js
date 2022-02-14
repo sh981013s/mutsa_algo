@@ -8,6 +8,7 @@ import MarkdownEditor from '../../components/NewQuestion/MarkdownEditor';
 import { useHistory, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAlert } from 'react-alert';
+import { buttonScale, butttonScale } from '../../utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -210,8 +211,8 @@ const NewQuestion = () => {
             <StyledLink to="/new-question">
               <NewBtn
                 onClick={editProb}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
               >
                 문제 수정 완료
               </NewBtn>
@@ -220,8 +221,8 @@ const NewQuestion = () => {
             <StyledLink to="/new-question">
               <NewBtn
                 onClick={submitProb}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
               >
                 문제 등록
               </NewBtn>
@@ -236,8 +237,8 @@ const NewQuestion = () => {
               <motion.input
                 onChange={(e) => setTestInputOne(e.target.value)}
                 type="text"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 value={testInputOne}
               />
             </div>
@@ -248,8 +249,8 @@ const NewQuestion = () => {
                 onChange={() => {
                   setTestInputOneCheck(!testInputOneCheck);
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 checked={testInputOneCheck}
               />
             </div>
@@ -272,8 +273,8 @@ const NewQuestion = () => {
                 onChange={() => {
                   setTestOutputOneCheck(!testOutputOneCheck);
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 checked={testOutputOneCheck}
               />
             </div>
@@ -284,8 +285,8 @@ const NewQuestion = () => {
               <motion.input
                 onChange={(e) => setTestInputTwo(e.target.value)}
                 type="text"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 value={testInputTwo}
               />
             </div>
@@ -296,8 +297,8 @@ const NewQuestion = () => {
                 onChange={() => {
                   setTestInputTwoCheck(!testInputTwoCheck);
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 checked={testInputTwoCheck}
               />
             </div>
@@ -308,8 +309,8 @@ const NewQuestion = () => {
               <motion.input
                 onChange={(e) => setTestOutputTwo(e.target.value)}
                 type="text"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 value={testOutputTwo}
               />
             </div>
@@ -320,8 +321,8 @@ const NewQuestion = () => {
                 onChange={() => {
                   setTestOutputTwoCheck(!testOutputTwoCheck);
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={buttonScale.whileHover}
+                whileTap={buttonScale.whileTap}
                 checked={testOutputTwoCheck}
               />
             </div>

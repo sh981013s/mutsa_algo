@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { styled as Styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,6 +15,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { motion } from 'framer-motion';
 import useGetProbs from '../../hooks/useGetProbs';
 import { useAlert } from 'react-alert';
+import { buttonScale, minusXAnimation } from '../../utils/constants/constants';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -139,14 +139,8 @@ export default function Problems() {
   return (
     <Container>
       <motion.div
-        initial={{
-          x: -5000,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-        animate={{
-          x: 0,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
+        initial={minusXAnimation.initial}
+        animate={minusXAnimation.animate}
       >
         <h1>📄 전체 문제</h1>
         <DescSection>
@@ -186,16 +180,16 @@ export default function Problems() {
                           {isProved(user?.email) && (
                             <>
                               <EditDeleteBtn
-                                whileHover={{ scale: 1.3 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileHover={buttonScale.whileHover}
+                                whileTap={buttonScale.whileTap}
                               >
                                 <Link to={`/new-question/${single.id}`}>
                                   📜
                                 </Link>
                               </EditDeleteBtn>
                               <EditDeleteBtn
-                                whileHover={{ scale: 1.3 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileHover={buttonScale.whileHover}
+                                whileTap={buttonScale.whileTap}
                                 onClick={() => {
                                   deleteBtnHandler(single.id);
                                 }}
@@ -217,16 +211,16 @@ export default function Problems() {
                           {isProved(user?.email) && (
                             <>
                               <EditDeleteBtn
-                                whileHover={{ scale: 1.3 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileHover={buttonScale.whileHover}
+                                whileTap={buttonScale.whileTap}
                               >
                                 <Link to={`/new-question/${single.id}`}>
                                   📜
                                 </Link>
                               </EditDeleteBtn>
                               <EditDeleteBtn
-                                whileHover={{ scale: 1.3 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileHover={buttonScale.whileHover}
+                                whileTap={buttonScale.whileTap}
                                 onClick={() => {
                                   deleteBtnHandler(single.id);
                                 }}
@@ -245,7 +239,10 @@ export default function Problems() {
         </StyledTable>
         {isProved(user?.email) && (
           <StyledLink to="/new-question">
-            <NewBtn whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <NewBtn
+              whileHover={buttonScale.whileHover}
+              whileTap={buttonScale.whileTap}
+            >
               문제 등록
             </NewBtn>
           </StyledLink>
