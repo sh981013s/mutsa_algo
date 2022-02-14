@@ -31,3 +31,23 @@ export const menuProps = {
     },
   },
 };
+
+export const buttonScale = {
+  whileHover: {
+    scale: 1.1,
+  },
+  whileTap: {
+    scale: 0.9,
+  },
+};
+
+export const minusXAnimation = {
+  initial: {
+    x: -5000,
+    transition: { type: 'spring', duration: 0.6, delay: 0.1 },
+  },
+  animate: {
+    x: 0,
+    transition: { type: 'spring', duration: 0.6, delay: 0.1 },
+  },
+};

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import logo from '../../assets/imgs/logo.png';
 import { motion } from 'framer-motion';
+import { buttonScale, minusXAnimation } from '../../utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -42,18 +43,17 @@ const Link = styled(motion.a)`
   padding: 0 1rem;
 `;
 
+const ChatBtn = styled(motion.div)`
+  width: 100%;
+  margin: 0 !important;
+`;
+
 const Home = () => {
   return (
     <Container>
       <motion.div
-        initial={{
-          x: -5000,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
-        animate={{
-          x: 0,
-          transition: { type: 'spring', duration: 0.6, delay: 0.1 },
-        }}
+        initial={minusXAnimation.initial}
+        animate={minusXAnimation.animate}
       >
         <motion.img src={logo} alt="main-logo" />
         <motion.p>
@@ -69,11 +69,14 @@ const Home = () => {
         <Last>
           문의: 010-9302-1013 이승환 <br />
         </Last>
-        <motion.span whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+        <ChatBtn
+          whileHover={buttonScale.whileHover}
+          whileTap={buttonScale.whileTap}
+        >
           <Link href="https://open.kakao.com/o/sVpSIOYd/" target="blank">
             1:1 오픈챗 문의 👍
           </Link>
-        </motion.span>
+        </ChatBtn>
       </motion.div>
     </Container>
   );
