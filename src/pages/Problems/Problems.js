@@ -16,6 +16,9 @@ import { motion } from 'framer-motion';
 import useGetProbs from '../../hooks/useGetProbs';
 import { useAlert } from 'react-alert';
 import { buttonScale, minusXAnimation } from '../../utils/constants/constants';
+import { Progress } from 'react-sweet-progress';
+import 'react-sweet-progress/lib/style.css';
+import { useEffect } from 'react';
 
 const StyledTableCell = Styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -124,6 +127,11 @@ export default function Problems() {
     ['writer', '==', user?.displayName]
   );
 
+  useEffect(() => {
+    console.log(problems, 'probs');
+    console.log(solvedProbs.length, 'solvedprobs');
+  }, [solvedProbs]);
+
   const deleteBtnHandler = async (id) => {
     const deleteProb = async (id) => {
       const ref = doc(db, 'probs', id);
@@ -142,6 +150,12 @@ export default function Problems() {
         initial={minusXAnimation.initial}
         animate={minusXAnimation.animate}
       >
+        <Progress
+          type="circle"
+          width={70}
+          percent={(solvedProbs.length / problems.length) * 100}
+        />
+
         <h1>📄 전체 문제</h1>
         <DescSection>
           {isProved(user?.email) && (
