@@ -153,7 +153,11 @@ export default function Problems() {
         <Progress
           type="circle"
           width={70}
-          percent={(solvedProbs.length / problems.length) * 100}
+          percent={
+            isNaN((solvedProbs.length / problems.length) * 100)
+              ? 0
+              : (solvedProbs.length / problems.length) * 100
+          }
         />
 
         <h1>📄 전체 문제</h1>
