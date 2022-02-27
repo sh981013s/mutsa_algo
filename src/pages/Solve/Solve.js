@@ -38,12 +38,14 @@ const CodeContainer = styled.div`
 `;
 
 const Instruction = styled(motion.div)`
-  width: 50%;
+  width: 60%;
   height: 84%;
   background: #212325;
   -webkit-box-shadow: 6px 5px 15px 1px #898989;
   box-shadow: 6px 5px 15px 1px #898989;
   .wmde-markdown {
+    box-sizing: border-box;
+    padding: 1rem;
     font-size: inherit;
     line-height: inherit;
     font-family: inherit;
@@ -60,6 +62,9 @@ const Instruction = styled(motion.div)`
   }
   .dJRmu {
     padding: 0;
+  }
+  code {
+    color: black;
   }
 `;
 
