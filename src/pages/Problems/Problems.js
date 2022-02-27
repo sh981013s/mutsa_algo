@@ -127,11 +127,6 @@ export default function Problems() {
     ['writer', '==', user?.displayName]
   );
 
-  useEffect(() => {
-    console.log(problems, 'probs');
-    console.log(solvedProbs.length, 'solvedprobs');
-  }, [solvedProbs]);
-
   const deleteBtnHandler = async (id) => {
     const deleteProb = async (id) => {
       const ref = doc(db, 'probs', id);
@@ -156,7 +151,7 @@ export default function Problems() {
           percent={
             isNaN((solvedProbs.length / problems.length) * 100)
               ? 0
-              : (solvedProbs.length / problems.length) * 100
+              : Math.floor((solvedProbs.length / problems.length) * 100)
           }
         />
 
