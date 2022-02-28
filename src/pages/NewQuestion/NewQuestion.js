@@ -8,7 +8,7 @@ import MarkdownEditor from '../../components/NewQuestion/MarkdownEditor';
 import { useHistory, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAlert } from 'react-alert';
-import { buttonScale, butttonScale } from '../../utils/constants/constants';
+import { buttonScale } from '../../utils/constants/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -234,8 +234,11 @@ const NewQuestion = () => {
           <div>
             <div>
               <span>📄Input 1 :</span>
-              <motion.input
-                onChange={(e) => setTestInputOne(e.target.value)}
+              <motion.textarea
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setTestInputOne(e.target.value);
+                }}
                 type="text"
                 whileHover={buttonScale.whileHover}
                 whileTap={buttonScale.whileTap}
@@ -258,7 +261,7 @@ const NewQuestion = () => {
           <div>
             <div>
               <span>✅Output 1 :</span>
-              <motion.input
+              <motion.textarea
                 onChange={(e) => setTestOutputOne(e.target.value)}
                 type="text"
                 whileHover={{ scale: 1.1 }}
@@ -282,7 +285,7 @@ const NewQuestion = () => {
           <div>
             <div>
               <span>📄Input 2 :</span>
-              <motion.input
+              <motion.textarea
                 onChange={(e) => setTestInputTwo(e.target.value)}
                 type="text"
                 whileHover={buttonScale.whileHover}
@@ -306,7 +309,7 @@ const NewQuestion = () => {
           <div>
             <div>
               <span>✅Output 2 :</span>
-              <motion.input
+              <motion.textarea
                 onChange={(e) => setTestOutputTwo(e.target.value)}
                 type="text"
                 whileHover={buttonScale.whileHover}

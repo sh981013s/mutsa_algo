@@ -131,7 +131,7 @@ const MarkDown = styled(MDEditor.Markdown)`
   overflow-y: scroll;
 `;
 
-const Solve = ({ match }) => {
+const Solve = () => {
   const alert = useAlert();
   const { title } = useParams();
   const { user } = useAuthContext();
