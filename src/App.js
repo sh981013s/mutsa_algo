@@ -45,13 +45,14 @@ function App() {
                 <Home />
               </Route>
               <Route exact path="/problems">
-                {!user ? (
+                {/*                {!user ? (
                   <Redirect to="/login" />
                 ) : !user?.displayName.includes('20') ? (
                   <Redirect to="/setdisplayname" />
                 ) : (
                   <Problems />
-                )}
+                )}*/}
+                {!user ? <Redirect to="/login" /> : <Problems />}
               </Route>
               <Route exact path="/solve/:title">
                 {!user ? (
